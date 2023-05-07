@@ -11,15 +11,15 @@ namespace Book_API.Controller
     [ApiController]
     public class PurchasableController : ControllerBase
     {
-        private readonly IPurchasable purchasableBooksService;
-        public PurchasableController(IPurchasable _purchasableBooksService)
+        private readonly IPurchasable purchasableService;
+        public PurchasableController(IPurchasable _purchasableService)
         {
-            purchasableBooksService = _purchasableBooksService;
+            purchasableService = _purchasableService;
         }
         [HttpGet]
         public async Task<ActionResult<List<PurchasableBookDTO>>> GetBooks()
         {
-            List<PurchasableBook> books = await purchasableBooksService.GetAll();
+            List<PurchasableBook> books = await purchasableService.GetAll();
             if (books.Count == 0) return NotFound();
             List<PurchasableBookDTO> booksDTOs = new();
             foreach (PurchasableBook book in books)
@@ -30,15 +30,15 @@ namespace Book_API.Controller
         [HttpGet("{id:int}")]
         public async Task<ActionResult<PurchasableBookDTO>> GetBookById(int id)
         {
-            PurchasableBook book = await purchasableBooksService.GetById(id);
+            PurchasableBook book = await purchasableService.GetById(id);
             if (book == null) return NotFound();
             return Ok(book.ToPurchasableBookDTO());
         }
 
         [HttpDelete("{id:int}")]
-        public async Task<ActionResult<PurchasableBookDTO>> DeleteBookById(int id)
+        public async Task<ActionResult<PurchasableBook>> DeleteBookById(int id)
         {
-            PurchasableBook book = await purchasableBooksService.Delete(id);
+            PurchasableBook book = await purchasableService.Delete(id);
             if (book == null) return NotFound();
             return Ok(book);
         }
@@ -46,7 +46,7 @@ namespace Book_API.Controller
         [HttpPost]
         public async Task<ActionResult<PurchasableBookDTO>> AddBook(PurchasableBook book)
         {
-            await purchasableBooksService.Add(book);
+            await purchasableService.Add(book);
             return CreatedAtAction("GetBookById", book.Id, book);
         }
     }

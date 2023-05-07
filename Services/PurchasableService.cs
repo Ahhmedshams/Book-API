@@ -4,20 +4,20 @@ using System.Diagnostics.Contracts;
 
 namespace Book_API.Services
 {
-    public class PurchasableBookService : IPurchasable
+    public class PurchasableService : IPurchasable
     {
         private BookifyContextDb context;
 
-        public PurchasableBookService(BookifyContextDb context)
+        public PurchasableService(BookifyContextDb context)
         {
             this.context = context;
         }
 
         public Task<List<PurchasableBook>> GetAll() =>
-            context.PurchasableBooks.Include("Categories").ToListAsync();
+            context.PurchasableBooks.Include("Author").Include("Categories").ToListAsync();
 
         public Task<PurchasableBook> GetById(int id) =>
-            context.PurchasableBooks.Include("Categories").FirstOrDefaultAsync(e => e.Id == id);
+            context.PurchasableBooks.Include("Author").Include("Categories").FirstOrDefaultAsync(e => e.Id == id);
 
         public async Task<PurchasableBook> Edit(int id, PurchasableBook book)
         {

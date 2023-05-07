@@ -6,7 +6,7 @@ namespace Book_API.Services
     {
         Task<PurchasableBook> Add(PurchasableBook book);
         Task<PurchasableBook> Delete(int id);
-        Task<PurchasableBook> Edit(int id, PurchasableBook category);
+        Task<PurchasableBook> Edit(int id, PurchasableBook book);
         Task<List<PurchasableBook>> GetAll();
         Task<PurchasableBook> GetById(int id);
     }
