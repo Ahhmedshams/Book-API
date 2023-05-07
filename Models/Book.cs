@@ -1,7 +1,5 @@
 ﻿using Book_API.Models;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.CodeAnalysis;
-using System.Reflection.Metadata;
 
 public abstract class Book
 {
@@ -12,5 +10,5 @@ public abstract class Book
     public byte[] Image { get; set; }
     public Author Author { get; set; }
     [ForeignKey("Author")]
-    public Author AuthorId { get; set; }
+    public int AuthorId { get; set; }
 }
