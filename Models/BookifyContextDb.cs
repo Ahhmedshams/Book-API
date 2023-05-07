@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.Contracts;
 
 namespace Book_API.Models
 {
@@ -21,8 +22,14 @@ namespace Book_API.Models
         public virtual DbSet<RentableBook> RentableBooks { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Author>().Property(e => e.Image).HasColumnType("MediumBlob");
-            modelBuilder.Entity<Book>().Property(e => e.Image).HasColumnType("MediumBlob");
+
+            modelBuilder.Entity<Book>().ToTable("Books");
+
+
+            modelBuilder.Entity<Author>().Property(e => e.Image).HasColumnType("VarBinary");
+            modelBuilder.Entity<Book>().Property(e => e.Image).HasColumnType("VarBinary");
+
+
             base.OnModelCreating(modelBuilder);
         }
     }
