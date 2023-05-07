@@ -5,15 +5,11 @@ namespace Book_API.Models
 {
     public class OrderItem
     {
-        [Key]
         public int Id { get; set; }
 
-        [ForeignKey("Order")]
         public int OrderId { get; set; }
 
         public Order Order { get; set; }
-
-        [ForeignKey("Book")]
 
         public int BookId { get; set; }
 
@@ -26,7 +22,6 @@ namespace Book_API.Models
 
         [DataType(DataType.Currency)]
         public Decimal TotalPrice { get; set; }
-
 
     }
 }
