@@ -40,6 +40,7 @@ namespace Book_API.Controller
             if(category==null) return NotFound();
             return Ok(category);
         }
+
         [HttpPost]
         public async Task<ActionResult<CategoryDTO>> AddCategory(Category category)
         {

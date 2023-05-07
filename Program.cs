@@ -22,6 +22,7 @@ namespace Book_API
             });
 
             builder.Services.AddScoped<ICategories, CategoriesService>();
+            builder.Services.AddScoped<IPurchasable, PurchasableBookService>();
 
             var app = builder.Build();
 
