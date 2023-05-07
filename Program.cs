@@ -1,8 +1,11 @@
+using Book_API.Helpers;
 using Book_API.Models;
+using Book_API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Configuration;
 using System.Text;
 
 namespace Book_API
@@ -25,11 +28,15 @@ namespace Book_API
             });
 
 
+
+            builder.Services.AddScoped<IAuthService, AuthService>();
+            
             //Identity
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<BookifyContextDb>();
+            builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
 
-            string KeyAsString = builder.Configuration["JWT:SecritKey"];
+            string KeyAsString = builder.Configuration["JWT:Key"];
             byte[] KeyAsByte = Encoding.UTF8.GetBytes(KeyAsString);
             var authSecret = new SymmetricSecurityKey(KeyAsByte);
 
@@ -45,9 +52,9 @@ namespace Book_API
                 options.TokenValidationParameters = new TokenValidationParameters()
                 {
                     ValidateIssuer = true,
-                    ValidIssuer = builder.Configuration["JWT:ValidIss"],
+                    ValidIssuer = builder.Configuration["JWT:Issuer"],
                     ValidateAudience = true,
-                    ValidAudience = builder.Configuration["JWT:ValidAdu"],
+                    ValidAudience = builder.Configuration["JWT:Audience"],
                     IssuerSigningKey = authSecret
                 };
             }); // how to check if token valid or not 
@@ -63,6 +70,7 @@ namespace Book_API
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

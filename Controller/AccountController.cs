@@ -1,5 +1,6 @@
 ﻿using Book_API.DTO;
 using Book_API.Models;
+using Book_API.Services;
 using Book_API.Utilites;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -15,106 +16,56 @@ namespace Book_API.Controller
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IConfiguration _configuration;
+        private readonly IAuthService _authService;
 
-        public AccountController ( UserManager<ApplicationUser > userManager, IConfiguration configuration )
+        public AccountController (IAuthService authService)
         {
-            _userManager = userManager;
-            _configuration = configuration;
+            _authService = authService;
         }
 
 
         [HttpPost("Register")]
-        public async Task<IActionResult> Register(RegisterUserDTO userDTO)
+        public async Task<IActionResult> RegisterAsync( [FromBody] RegisterUserDTO userDTO)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            //Create new user 
+            var result = await _authService.RegisterAsync(userDTO);
 
-            ApplicationUser userModel = userDTO.ToApplicationUser();
+            if (!result.IsAuthenticated)
+                return BadRequest(result.Message);
 
-            IdentityResult result = await _userManager.CreateAsync(userModel, userDTO.Password);
-
-            if (result.Succeeded)
-            {
-                return Ok("Create Succes");
-            }
-            else
-            {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
-               
-            }
-
-            return BadRequest(ModelState);
+            return Ok(result);
         }
+
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login (LoginDTO userDTO)
+        public async Task<IActionResult> GetTokenAsync(LoginDTO userDTO)
         {
-            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            ApplicationUser userModel = await _userManager.FindByEmailAsync(userDTO.Email);
+            var result = await _authService.GetTokenAsync(userDTO);
 
-            if(userModel!= null && await _userManager.CheckPasswordAsync(userModel, userDTO.Password)) 
-            {
+            if (!result.IsAuthenticated)
+                return BadRequest(result.Message);
 
-                //Create Claims
-                List<Claim> userClaims = await  CreateUserClaims(userModel);
-
-                JwtSecurityToken userToken = CreateToken(userClaims);
-
-                return Ok( new {
-                                token = new JwtSecurityTokenHandler().WriteToken(userToken),
-                                expiration = userToken.ValidTo
-                                });
-            }
-           return BadRequest("Invalid Login Account");
+            return Ok(result);
         }
 
-
-        private async Task< List<Claim>> CreateUserClaims (ApplicationUser userModel)
+        [HttpPost("AddRole")]
+        public async Task<IActionResult> AddRoleAsync([FromBody] AddRoleDTO model)
         {
-            List<Claim> userClaims = new();
-            userClaims.Add(new Claim("FirstName", userModel.FirstName));
-            userClaims.Add(new Claim("LastName", userModel.LastName));
-            userClaims.Add(new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
-            userClaims.Add(new Claim(ClaimTypes.NameIdentifier, userModel.Id));
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            List<string> roles = (List<string>)await _userManager.GetRolesAsync(userModel);
-            if (roles != null)
-            {
-                foreach (string role in roles)
-                {
-                    userClaims.Add(new Claim(ClaimTypes.Role, role));
-                }
-            }
+            var result = await _authService.AddRoleAsync(model);
 
+            if (!string.IsNullOrEmpty(result))
+                return BadRequest(result);
 
-            return userClaims;
+            return Ok(model);
         }
 
-        private JwtSecurityToken CreateToken(List<Claim> userClaims)
-        {
-            string KeyAsString = _configuration["JWT:SecritKey"];
-            byte[] KeyAsByte = Encoding.UTF8.GetBytes(KeyAsString);
-
-            var authSecret = new SymmetricSecurityKey(KeyAsByte);
-            SigningCredentials credentials = new SigningCredentials(authSecret, SecurityAlgorithms.HmacSha256); //key , Alg
-
-            //Create Token
-            JwtSecurityToken userToken = new JwtSecurityToken(
-                issuer: _configuration["JWT:ValidIss"],
-                audience: _configuration["JWT:ValidAdu"],
-                expires: DateTime.Now.AddHours(2),
-                claims: userClaims,
-                signingCredentials: credentials
-                );
-
-            return userToken;
-        }
     }
 }
