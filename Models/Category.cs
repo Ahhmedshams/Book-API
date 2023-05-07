@@ -1,4 +1,6 @@
 ﻿
+using Book_API.DTO;
+
 public class Category
 {
 	public int Id { get; set; }

@@ -1,5 +1,4 @@
 ﻿using Book_API.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Book_API.Services
@@ -14,18 +13,21 @@ namespace Book_API.Services
         }
 
         public Task<List<Category>> GetAll() =>
-            context.Categories.ToListAsync();
+            context.Categories.Include("Books").ToListAsync();
 
         public Task<Category> GetById(int id) =>
-            context.Categories.FirstOrDefaultAsync(e=>e.Id==id);
+            context.Categories.Include("Books").FirstOrDefaultAsync(e=>e.Id==id);
 
-        //public async Task<Category> Edit(int id,Category category)
-        //{
-        //    Category foundCategory=await context.Categories.Include("Books").FirstOrDefaultAsync(e => e.Id == id);
-        //    if (foundCategory == null) return null;
-        //    foundCategory.Name=category.Name;
-        //    foundCategory
-
-        //}
+        public async Task<Category> Edit(int id, Category category)
+        {
+            Category foundCategory = await context.Categories.Include("Books").FirstOrDefaultAsync(e => e.Id == id);
+            if (foundCategory == null) return null;
+            foundCategory.Name = category.Name;
+            foundCategory.Books= category.Books;
+            await context.SaveChangesAsync();
+            return foundCategory;
+        }
+    
+        
     }
 }

@@ -12,7 +12,4 @@ public abstract class Book
     public Author Author { get; set; }
     [ForeignKey("Author")]
     public int AuthorId { get; set; }
-
-    [DataType(DataType.Currency)]
-    public decimal Price { get; set; }
 }
