@@ -1,8 +1,11 @@
-﻿namespace Book_API.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Book_API.Models
 {
-    public class PurchasableBook : BookAbs
+    public class PurchasableBook : Book
     {
-        public double Price { get; set; }
+        [DataType(DataType.Currency)]
+        public decimal Price { get; set; }
         public int Quantity { get; set; }
     }
 }

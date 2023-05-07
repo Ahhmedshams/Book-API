@@ -13,7 +13,7 @@ namespace Book_API.Models
         public DateTime AvailableForReturnUntill;
 
         [DataType(DataType.Currency)]
-        public Decimal TotalPrice { get; set; }
+        public double TotalPrice { get; set; }
 
 
 
