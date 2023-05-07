@@ -12,7 +12,7 @@ namespace Book_API.Models
 
         public BookifyContextDb(DbContextOptions<BookifyContextDb> options) : base(options) { }
 
-       // public virtual DbSet<Book> Books { get; set; }
+        public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Author> Authors { get; set; }
         public virtual DbSet<Rent> Rents { get; set; }
@@ -22,13 +22,9 @@ namespace Book_API.Models
         public virtual DbSet<RentableBook> RentableBooks { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-            modelBuilder.Entity<Book>().ToTable("Books");
-
-
+            //modelBuilder.Entity<Book>().ToTable("Books");
             modelBuilder.Entity<Author>().Property(e => e.Image).HasColumnType("VarBinary");
             modelBuilder.Entity<Book>().Property(e => e.Image).HasColumnType("VarBinary");
-
 
             base.OnModelCreating(modelBuilder);
         }
