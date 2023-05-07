@@ -28,6 +28,20 @@ namespace Book_API.Services
             return foundCategory;
         }
     
-        
+        public async Task<Category> Delete(int id)
+        {
+            Category foundCategory = await context.Categories.FirstOrDefaultAsync(e => e.Id == id);
+            if (foundCategory == null) return null;
+            context.Categories.Remove(foundCategory);
+            await context.SaveChangesAsync();
+            return foundCategory; 
+        }
+    
+        public async Task<Category> Add(Category category)
+        {
+            context.Categories.Add(category);
+            await context.SaveChangesAsync();
+            return category;
+        }
     }
 }
