@@ -8,7 +8,7 @@ public abstract class Book
     protected string Title { get; set; }
     protected int NumberOfPages{ get; set; }
     protected List<Category> Categories { get; set; }
-    protected Blob Image { get; set; }
+    protected Byte[] Image { get; set; }
     protected Author Author { get; set; }
     [ForeignKey("Author")]
     protected Author AuthorId { get; set; }

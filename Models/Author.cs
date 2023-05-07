@@ -11,7 +11,7 @@ namespace Book_API.Models
 
         public string Biographpy { get; set; }
         [AllowNull]
-        public Blob Image { get; set; }
+        public Byte[] Image { get; set; }
 
     }
 }

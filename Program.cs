@@ -1,3 +1,6 @@
+using Book_API.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace Book_API
 {
     public class Program
@@ -12,6 +15,11 @@ namespace Book_API
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<BookifyContextDb>(options => {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Connection1"));
+            });
+
 
             var app = builder.Build();
 
