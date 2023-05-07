@@ -1,0 +1,31 @@
+﻿using Book_API.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+namespace Book_API.Services
+{
+    public class CategoriesService
+    {
+        private BookifyContextDb context;
+
+        public CategoriesService(BookifyContextDb context)
+        {
+            this.context = context;
+        }
+
+        public Task<List<Category>> GetAll() =>
+            context.Categories.ToListAsync();
+
+        public Task<Category> GetById(int id) =>
+            context.Categories.FirstOrDefaultAsync(e=>e.Id==id);
+
+        //public async Task<Category> Edit(int id,Category category)
+        //{
+        //    Category foundCategory=await context.Categories.Include("Books").FirstOrDefaultAsync(e => e.Id == id);
+        //    if (foundCategory == null) return null;
+        //    foundCategory.Name=category.Name;
+        //    foundCategory
+
+        //}
+    }
+}
