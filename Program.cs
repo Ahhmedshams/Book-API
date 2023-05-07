@@ -1,5 +1,9 @@
 using Book_API.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Book_API
 {
@@ -20,6 +24,33 @@ namespace Book_API
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Connection1"));
             });
 
+
+            //Identity
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<BookifyContextDb>();
+
+            string KeyAsString = builder.Configuration["JWT:SecritKey"];
+            byte[] KeyAsByte = Encoding.UTF8.GetBytes(KeyAsString);
+            var authSecret = new SymmetricSecurityKey(KeyAsByte);
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; // 
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; // not valid account
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = false;
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = builder.Configuration["JWT:ValidIss"],
+                    ValidateAudience = true,
+                    ValidAudience = builder.Configuration["JWT:ValidAdu"],
+                    IssuerSigningKey = authSecret
+                };
+            }); // how to check if token valid or not 
 
             var app = builder.Build();
 

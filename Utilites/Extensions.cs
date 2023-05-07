@@ -42,5 +42,20 @@ namespace Book_API.Utilites
                 RBD.Categories.Add(category.Name);
             return RBD;
         }
+
+
+        // User 
+        static public ApplicationUser ToApplicationUser (this RegisterUserDTO user)
+        {
+            ApplicationUser userModel = new ()
+            {
+                Email = user.Email,
+                UserName = user.Username,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+            };
+
+            return userModel;
+        }
     }
 }
