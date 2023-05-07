@@ -5,12 +5,12 @@ using System.Reflection.Metadata;
 
 public abstract class Book
 {
-    protected int Id { get; set; }
-    protected string Title { get; set; }
-    protected int NumberOfPages{ get; set; }
-    protected List<Category> Categories { get; set; }
-    protected Byte[] Image { get; set; }
-    protected Author Author { get; set; }
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public int NumberOfPages{ get; set; }
+    public List<Category> Categories { get; set; }
+    public byte[] Image { get; set; }
+    public Author Author { get; set; }
     [ForeignKey("Author")]
-    protected Author AuthorId { get; set; }
+    public Author AuthorId { get; set; }
 }
