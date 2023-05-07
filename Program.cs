@@ -1,6 +1,7 @@
 using Book_API.Helpers;
 using Book_API.Models;
 using Book_API.Services;
+using Book_API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -25,8 +26,17 @@ namespace Book_API
 
             builder.Services.AddDbContext<BookifyContextDb>(options => {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Connection1"));
+                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+
             });
 
+            builder.Services.AddScoped<ICategories, CategoriesService>();
+            builder.Services.AddScoped<IAuthorsService, AuthorsService>();
+
+            builder.Services.AddScoped<IPurchasable, PurchasableService>();
+            builder.Services.AddScoped<IRentable, RentableService>();
+
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
             builder.Services.AddScoped<IAuthService, AuthService>();

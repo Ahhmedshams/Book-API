@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Book_API.Migrations
 {
     [DbContext(typeof(BookifyContextDb))]
-    [Migration("20230507143710_new")]
-    partial class @new
+    [Migration("20230507162635_updated")]
+    partial class updated
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,9 +44,6 @@ namespace Book_API.Migrations
 
                     b.Property<int>("NumberOfPages")
                         .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
@@ -197,6 +194,9 @@ namespace Book_API.Migrations
             modelBuilder.Entity("Book_API.Models.PurchasableBook", b =>
                 {
                     b.HasBaseType("Book");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");

@@ -10,6 +10,5 @@ public abstract class Book
     public List<Category> Categories { get; set; }
     public byte[] Image { get; set; }
     public Author Author { get; set; }
-    [ForeignKey("Author")]
     public int AuthorId { get; set; }
 }

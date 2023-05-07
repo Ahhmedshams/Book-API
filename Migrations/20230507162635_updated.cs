@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Book_API.Migrations
 {
-    public partial class @new : Migration
+    public partial class updated : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -62,8 +62,8 @@ namespace Book_API.Migrations
                     NumberOfPages = table.Column<int>(type: "int", nullable: false),
                     Image = table.Column<byte[]>(type: "VarBinary", nullable: true),
                     AuthorId = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: true),
                     NumberOfCopies = table.Column<int>(type: "int", nullable: true),
                     AvailableCopies = table.Column<int>(type: "int", nullable: true)
