@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Book_API.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using Book_API.Services;
 using Book_API.DTO;
 using Book_API.Utilites;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace Book_API.Controller
 {
@@ -17,8 +9,8 @@ namespace Book_API.Controller
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private readonly CategoriesService categoriesService;
-        public CategoriesController(CategoriesService _categoriesService)
+        private readonly ICategories categoriesService;
+        public CategoriesController(ICategories _categoriesService)
         {
             categoriesService = _categoriesService;
         }
@@ -46,7 +38,7 @@ namespace Book_API.Controller
         {
             Category category = await categoriesService.Delete(id);
             if(category==null) return NotFound();
-            return Ok(category.ToCategoryDTO());
+            return Ok(category);
         }
         [HttpPost]
         public async Task<ActionResult<CategoryDTO>> AddCategory(Category category)

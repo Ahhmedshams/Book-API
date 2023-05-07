@@ -1,4 +1,5 @@
 using Book_API.Models;
+using Book_API.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Book_API
@@ -20,6 +21,7 @@ namespace Book_API
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Connection1"));
             });
 
+            builder.Services.AddScoped<ICategories, CategoriesService>();
 
             var app = builder.Build();
 

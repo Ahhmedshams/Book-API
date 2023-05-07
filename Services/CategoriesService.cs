@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Book_API.Services
 {
-    public class CategoriesService
+    public class CategoriesService : ICategories
     {
         private BookifyContextDb context;
 
@@ -16,27 +16,27 @@ namespace Book_API.Services
             context.Categories.Include("Books").ToListAsync();
 
         public Task<Category> GetById(int id) =>
-            context.Categories.Include("Books").FirstOrDefaultAsync(e=>e.Id==id);
+            context.Categories.Include("Books").FirstOrDefaultAsync(e => e.Id == id);
 
         public async Task<Category> Edit(int id, Category category)
         {
             Category foundCategory = await context.Categories.Include("Books").FirstOrDefaultAsync(e => e.Id == id);
             if (foundCategory == null) return null;
             foundCategory.Name = category.Name;
-            foundCategory.Books= category.Books;
+            foundCategory.Books = category.Books;
             await context.SaveChangesAsync();
             return foundCategory;
         }
-    
+
         public async Task<Category> Delete(int id)
         {
             Category foundCategory = await context.Categories.FirstOrDefaultAsync(e => e.Id == id);
             if (foundCategory == null) return null;
             context.Categories.Remove(foundCategory);
             await context.SaveChangesAsync();
-            return foundCategory; 
+            return foundCategory;
         }
-    
+
         public async Task<Category> Add(Category category)
         {
             context.Categories.Add(category);
