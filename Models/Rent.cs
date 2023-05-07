@@ -1,4 +1,5 @@
 ﻿using Book_API.Models;
+using System.ComponentModel.DataAnnotations;
 
 public class Rent
 {
@@ -7,7 +8,7 @@ public class Rent
     public int BookId { get; set; }
     //public User User{ get; set; }
     //public int UserId{ get; set; }
-    public DateOnly StartDate { get; set; }
-    public DateOnly EndDate { get; set; }
+    public DateTime StartDate { get; set; }
+    public DateTime EndDate { get; set; }
     public bool IsReturned { get; set; }
 }

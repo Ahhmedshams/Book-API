@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection.Metadata;
 
-public abstract class BookAbs
+public abstract class Book
 {
     protected int Id { get; set; }
     protected string Title { get; set; }

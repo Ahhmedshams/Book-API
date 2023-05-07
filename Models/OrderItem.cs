@@ -17,7 +17,7 @@ namespace Book_API.Models
 
         public int BookId { get; set; }
 
-        public Book Book { get; set; }
+        public PurchasableBook Book { get; set; }
 
         public int Quantity { get; set; }
 

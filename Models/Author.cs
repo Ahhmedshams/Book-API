@@ -1,4 +1,5 @@
-﻿using System.Reflection.Metadata;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Reflection.Metadata;
 
 namespace Book_API.Models
 {
@@ -9,7 +10,7 @@ namespace Book_API.Models
         public string Name { get; set; }
 
         public string Biographpy { get; set; }
-
+        [AllowNull]
         public Blob Image { get; set; }
 
     }
