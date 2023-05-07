@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Book_API.Models
+﻿namespace Book_API.Models
 {
     public class RentableBook : BookAbs
     {
