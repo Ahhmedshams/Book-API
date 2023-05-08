@@ -23,7 +23,7 @@ namespace Book_API
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddDbContext<BookifyContextDb>(options => {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("Connection2"));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Connection1"));
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
             });
@@ -31,9 +31,11 @@ namespace Book_API
             builder.Services.AddScoped<ICategory, CategoryService>();
             builder.Services.AddScoped<IAuthorService, AuthorsService>();
             builder.Services.AddScoped<IPurchasable, PurchasableService>();
-
             builder.Services.AddScoped<IRentable, RentableService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<ISubscribable, SubscriberService>();
+            builder.Services.AddScoped<IApplicationUser, ApplicationUserService>();
+
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             

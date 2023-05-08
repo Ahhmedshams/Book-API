@@ -14,6 +14,11 @@ namespace Book_API.Models
         [ForeignKey("subscriptionType")]
         public int TypeId { get; set; }
 
+        
+        public string UserId { get; set; }
+
+
+        [ ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
 
         public IEnumerable<Rent> Rents { get; set; }

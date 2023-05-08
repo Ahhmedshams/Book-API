@@ -16,7 +16,7 @@ namespace Book_API.Services
             _userManager = userManager;
         }
 
-        public async Task<ApplicationUserDTO> GetById(string id)
+        public async Task<ApplicationUserDTO> GetByIdAsync(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
             if (user == null) return null;
@@ -24,12 +24,12 @@ namespace Book_API.Services
             return user.ToApplicationUserDTO();
         }
 
-        public Task<ApplicationUserDTO> Edit(int id, ApplicationUser user)
+        public Task<ApplicationUserDTO> EditAsync(int id, ApplicationUser user)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<List<ApplicationUserDTO>> GetAll()
+        public async Task<List<ApplicationUserDTO>> GetAllAsync()
         {
             var user = await _userManager.Users.ToListAsync();
             if (user.Count == 0 ) return null;

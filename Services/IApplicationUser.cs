@@ -5,8 +5,8 @@ namespace Book_API.Services
 {
     public interface IApplicationUser
     {
-        Task<ApplicationUserDTO> Edit(int id, ApplicationUser user);
-        Task<List<ApplicationUserDTO>> GetAll();
-        Task<ApplicationUserDTO> GetById(string id);
+        Task<ApplicationUserDTO> EditAsync(int id, ApplicationUser user);
+        Task<List<ApplicationUserDTO>> GetAllAsync();
+        Task<ApplicationUserDTO> GetByIdAsync(string id);
     }
 }
