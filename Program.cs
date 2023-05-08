@@ -1,12 +1,10 @@
 using Book_API.Helpers;
 using Book_API.Models;
 using Book_API.Services;
-using Book_API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Configuration;
 using System.Text;
 
 namespace Book_API
@@ -25,25 +23,24 @@ namespace Book_API
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddDbContext<BookifyContextDb>(options => {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("Connection1"));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Connection2"));
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
             });
 
             builder.Services.AddScoped<ICategories, CategoriesService>();
             builder.Services.AddScoped<IAuthorsService, AuthorsService>();
-
             builder.Services.AddScoped<IPurchasable, PurchasableService>();
+
             builder.Services.AddScoped<IRentable, RentableService>();
+            builder.Services.AddScoped<IAuthService, AuthService>();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-
-            builder.Services.AddScoped<IAuthService, AuthService>();
             
             //Identity
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<BookifyContextDb>();
+
             builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
 
             string KeyAsString = builder.Configuration["JWT:Key"];

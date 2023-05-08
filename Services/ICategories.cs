@@ -1,4 +1,6 @@
-﻿namespace Book_API.Services
+﻿using Book_API.Models;
+
+namespace Book_API.Services
 {
     public interface ICategories
     {
