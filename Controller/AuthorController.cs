@@ -11,9 +11,9 @@ namespace Book_API.Controller
     public class AuthorController : ControllerBase
     {
         private readonly IMapper mapper;
-        private readonly  IAuthorsService authorsService;
+        private readonly IAuthorService authorsService;
 
-        public AuthorController(IMapper mapper, IAuthorsService authorsService) {
+        public AuthorController(IMapper mapper, IAuthorService authorsService) {
             this.mapper=mapper;
             this.authorsService=authorsService;
         }

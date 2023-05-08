@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace Book_API.Services
 {
-    public class AuthorsService: IAuthorsService
+    public class AuthorsService: IAuthorService
     {
         private readonly BookifyContextDb context;
 

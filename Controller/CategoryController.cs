@@ -10,8 +10,8 @@ namespace Book_API.Controller
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly ICategories categoriesService;
-        public CategoryController(ICategories _categoriesService)
+        private readonly ICategory categoriesService;
+        public CategoryController(ICategory _categoriesService)
         {
             categoriesService = _categoriesService;
         }

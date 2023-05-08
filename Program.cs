@@ -28,8 +28,8 @@ namespace Book_API
 
             });
 
-            builder.Services.AddScoped<ICategories, CategoriesService>();
-            builder.Services.AddScoped<IAuthorsService, AuthorsService>();
+            builder.Services.AddScoped<ICategory, CategoryService>();
+            builder.Services.AddScoped<IAuthorService, AuthorsService>();
             builder.Services.AddScoped<IPurchasable, PurchasableService>();
 
             builder.Services.AddScoped<IRentable, RentableService>();

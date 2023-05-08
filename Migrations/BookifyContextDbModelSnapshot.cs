@@ -155,6 +155,22 @@ namespace Book_API.Migrations
                     b.ToTable("Authors");
                 });
 
+            modelBuilder.Entity("Book_API.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("Book_API.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -172,7 +188,12 @@ namespace Book_API.Migrations
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -276,22 +297,6 @@ namespace Book_API.Migrations
                     b.HasIndex("CategoriesId");
 
                     b.ToTable("BookCategory");
-                });
-
-            modelBuilder.Entity("Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -496,6 +501,15 @@ namespace Book_API.Migrations
                     b.Navigation("Author");
                 });
 
+            modelBuilder.Entity("Book_API.Models.Order", b =>
+                {
+                    b.HasOne("Book_API.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Book_API.Models.OrderItem", b =>
                 {
                     b.HasOne("Book_API.Models.PurchasableBook", "Book")
@@ -540,7 +554,7 @@ namespace Book_API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Category", null)
+                    b.HasOne("Book_API.Models.Category", null)
                         .WithMany()
                         .HasForeignKey("CategoriesId")
                         .OnDelete(DeleteBehavior.Cascade)
