@@ -8,5 +8,6 @@ namespace Book_API.Services
         Task<Order> Delete(int id);
         Task<List<Order>> GetAll();
         Task<Order> GetById(int id);
+        Task<Order> Edit(int id, Order order);
     }
 }
