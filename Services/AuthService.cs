@@ -53,7 +53,7 @@ namespace Book_API.Services
 
             JwtSecurityToken userToken = CreateToken(claims);
 
-            return new AuthModel
+            return new AuthModel()
             {
                 Email = user.Email,
                 ExpiresOn = userToken.ValidTo,

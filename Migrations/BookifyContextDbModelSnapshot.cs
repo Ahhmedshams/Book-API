@@ -209,6 +209,60 @@ namespace Book_API.Migrations
                     b.ToTable("OrderItems");
                 });
 
+            modelBuilder.Entity("Book_API.Models.Subscriber", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TypeId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Subscribers");
+                });
+
+            modelBuilder.Entity("Book_API.Models.SubscriptionType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumberOfBooks")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SubscriptionType");
+                });
+
             modelBuilder.Entity("BookCategory", b =>
                 {
                     b.Property<int>("BooksId")
@@ -393,9 +447,14 @@ namespace Book_API.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("SubscriberId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BookId");
+
+                    b.HasIndex("SubscriberId");
 
                     b.ToTable("Rents");
                 });
@@ -454,6 +513,23 @@ namespace Book_API.Migrations
                     b.Navigation("Book");
 
                     b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("Book_API.Models.Subscriber", b =>
+                {
+                    b.HasOne("Book_API.Models.SubscriptionType", "subscriptionType")
+                        .WithMany("subscribers")
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Book_API.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+
+                    b.Navigation("subscriptionType");
                 });
 
             modelBuilder.Entity("BookCategory", b =>
@@ -530,12 +606,26 @@ namespace Book_API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Book_API.Models.Subscriber", null)
+                        .WithMany("Rents")
+                        .HasForeignKey("SubscriberId");
+
                     b.Navigation("Book");
                 });
 
             modelBuilder.Entity("Book_API.Models.Order", b =>
                 {
                     b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("Book_API.Models.Subscriber", b =>
+                {
+                    b.Navigation("Rents");
+                });
+
+            modelBuilder.Entity("Book_API.Models.SubscriptionType", b =>
+                {
+                    b.Navigation("subscribers");
                 });
 #pragma warning restore 612, 618
         }

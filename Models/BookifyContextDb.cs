@@ -22,6 +22,8 @@ namespace Book_API.Models
         public virtual DbSet<OrderItem> OrderItems { get; set; }
         public virtual DbSet<PurchasableBook> PurchasableBooks { get; set; }
         public virtual DbSet<RentableBook> RentableBooks { get; set; }
+
+        public virtual DbSet<Subscriber> Subscribers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

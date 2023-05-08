@@ -1,16 +1,23 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using Microsoft.AspNetCore.DataProtection.KeyManagement;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Book_API.Models
 {
     public class Subscriber
     {
+        [Key]
         public int Id { get; set; }
-        
-        public string Name { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
 
-        public string Biographpy { get; set; }
-        [AllowNull]
-        public byte[] Image { get; set; }
+        [ForeignKey("subscriptionType")]
+        public int TypeId { get; set; }
 
+        public ApplicationUser User { get; set; }
+
+        public IEnumerable<Rent> Rents { get; set; }
+
+        public SubscriptionType subscriptionType { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace Book_API.Controller
     public class AuthorsController : ControllerBase
     {
         private readonly IMapper mapper;
-        private readonly IAuthorsService authorsService;
+        private readonly  IAuthorsService authorsService;
 
         public AuthorsController(IMapper mapper, IAuthorsService authorsService) {
             this.mapper=mapper;
