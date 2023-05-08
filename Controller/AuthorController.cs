@@ -2,19 +2,18 @@
 using Book_API.DTO;
 using Book_API.Models;
 using Book_API.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Book_API.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthorsController : ControllerBase
+    public class AuthorController : ControllerBase
     {
         private readonly IMapper mapper;
         private readonly IAuthorsService authorsService;
 
-        public AuthorsController(IMapper mapper, IAuthorsService authorsService) {
+        public AuthorController(IMapper mapper, IAuthorsService authorsService) {
             this.mapper=mapper;
             this.authorsService=authorsService;
         }

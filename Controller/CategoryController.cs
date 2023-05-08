@@ -1,16 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Book_API.DTO;
+using Book_API.Helpers;
 using Book_API.Services;
-using Book_API.DTO;
-using Book_API.Utilites;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Book_API.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoriesController : ControllerBase
+    public class CategoryController : ControllerBase
     {
         private readonly ICategories categoriesService;
-        public CategoriesController(ICategories _categoriesService)
+        public CategoryController(ICategories _categoriesService)
         {
             categoriesService = _categoriesService;
         }

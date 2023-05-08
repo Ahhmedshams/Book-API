@@ -5,11 +5,11 @@ namespace Book_API.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountController : ControllerBase
+    public class OrderController : ControllerBase
     {
         private readonly IAuthService _authService;
 
-        public AccountController (IAuthService authService)
+        public OrderController(IAuthService authService)
         {
             _authService = authService;
         }

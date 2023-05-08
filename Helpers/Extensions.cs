@@ -1,7 +1,7 @@
 ﻿using Book_API.DTO;
 using Book_API.Models;
 
-namespace Book_API.Utilites
+namespace Book_API.Helpers
 {
     static public class Extensions
     {
@@ -14,11 +14,12 @@ namespace Book_API.Utilites
         }
         static public PurchasableBookDTO ToPurchasableBookDTO(this PurchasableBook book)
         {
-            PurchasableBookDTO PBD = new PurchasableBookDTO() {
+            PurchasableBookDTO PBD = new PurchasableBookDTO()
+            {
                 Id = book.Id,
                 Title = book.Title,
                 AuthorName = book.Author.Name,
-                Image= book.Image,
+                Image = book.Image,
                 Price = book.Price,
                 NumberOfPages = book.NumberOfPages,
                 Quantity = book.Quantity
@@ -27,13 +28,14 @@ namespace Book_API.Utilites
                 PBD.Categories.Add(category.Name);
             return PBD;
         }
-        static public RentableBookDTO ToRentableBookDTO (this RentableBook book)
+        static public RentableBookDTO ToRentableBookDTO(this RentableBook book)
         {
-            RentableBookDTO RBD = new RentableBookDTO() {
+            RentableBookDTO RBD = new RentableBookDTO()
+            {
                 Id = book.Id,
                 Title = book.Title,
                 AuthorName = book.Author.Name,
-                Image= book.Image,
+                Image = book.Image,
                 NumberOfPages = book.NumberOfPages,
                 AvailableCopies = book.AvailableCopies,
                 NumberOfCopies = book.NumberOfCopies,
@@ -45,9 +47,9 @@ namespace Book_API.Utilites
 
 
         // User 
-        static public ApplicationUser ToApplicationUser (this RegisterUserDTO user)
+        static public ApplicationUser ToApplicationUser(this RegisterUserDTO user)
         {
-            ApplicationUser userModel = new ()
+            ApplicationUser userModel = new()
             {
                 Email = user.Email,
                 UserName = user.Username,
