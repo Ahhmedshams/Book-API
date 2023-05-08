@@ -48,5 +48,13 @@ namespace Book_API.Controller
             await purchasableService.Add(book);
             return CreatedAtAction("GetBookById", book.Id, book);
         }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<PurchasableBookDTO>> EditBook(int id,PurchasableBook book)
+        {
+            PurchasableBook editedBook = await purchasableService.Edit(id, book);
+            if(editedBook == null) return NotFound();
+            return Ok(editedBook.ToPurchasableBookDTO());
+        }
     }
 }

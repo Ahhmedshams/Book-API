@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Book_API.Services
 {
-    public class OrderService 
+    public class OrderService : IOrder
     {
         private BookifyContextDb context;
 
@@ -36,7 +36,7 @@ namespace Book_API.Services
             await context.SaveChangesAsync();
             return foundBook;
         }
-        
+
         public async Task<Order> Add(Order order)
         {
             context.Orders.Add(order);

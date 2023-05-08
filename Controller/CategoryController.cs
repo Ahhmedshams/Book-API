@@ -48,5 +48,13 @@ namespace Book_API.Controller
             await categoriesService.Add(category);
             return CreatedAtAction("GetCategoryById", category.Id, category);
         }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<CategoryDTO>> EditCategory(int id, Category category)
+        {
+            Category editedCategory = await categoriesService.Edit(id, category);
+            if (editedCategory == null) return NotFound();
+            return Ok(editedCategory.ToCategoryDTO());
+        }
     }
 }
