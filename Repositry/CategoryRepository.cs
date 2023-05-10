@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Book_API.Services
 {
-    public class CategoryRepository : CRUDRepository<Category>
+    public class CategoryRepository : CRUDRepository<Category>,ICategory
     {
         public CategoryRepository(BookifyContextDb context) : base(context) { }
 

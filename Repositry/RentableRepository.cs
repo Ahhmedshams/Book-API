@@ -5,7 +5,7 @@ using System.Diagnostics.Contracts;
 
 namespace Book_API.Services
 {
-    public class RentableRepository : CRUDRepository<RentableBook>
+    public class RentableRepository : CRUDRepository<RentableBook> , IRentable
     {
         public RentableRepository(BookifyContextDb context) : base(context) { }
 

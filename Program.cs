@@ -30,10 +30,10 @@ namespace Book_API
             });
 
             builder.Services.AddScoped<ICategory, CategoryRepository>();
-            builder.Services.AddScoped<IAuthor, AuthorsRepositry>();
-            builder.Services.AddScoped<IPurchasable, PurchasableRepository>();
-            builder.Services.AddScoped<IRentable, RentableRepository>();
+            builder.Services.AddScoped<IAuthor, AuthorRepository>();
             builder.Services.AddScoped<IOrder, OrderRepository>();
+            builder.Services.AddScoped<IRentable, RentableRepository>();
+            builder.Services.AddScoped<IPurchasable, PurchasableRepository>();
 
             builder.Services.AddScoped<IAuth, AuthRepository>();
 

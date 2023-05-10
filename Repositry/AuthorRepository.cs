@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace Book_API.Services
 {
-    public class AuthorRepository : CRUDRepository<Author>
+    public class AuthorRepository : CRUDRepository<Author> , IAuthor
     {
         public AuthorRepository(BookifyContextDb context) : base(context) { }
     }
