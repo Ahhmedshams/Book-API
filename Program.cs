@@ -1,6 +1,7 @@
 using Book_API.Helpers;
 using Book_API.Interfaces;
 using Book_API.Models;
+using Book_API.Repositry;
 using Book_API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -35,7 +36,7 @@ namespace Book_API
             builder.Services.AddScoped<IRentable, RentableRepository>();
             builder.Services.AddScoped<IPurchasable, PurchasableRepository>();
 
-            builder.Services.AddScoped<ISubscribable, SubscriberService>();
+            builder.Services.AddScoped<ISubscribable, SubscriberRepository>();
             builder.Services.AddScoped<IApplicationUser, ApplicationUserService>();
 
             builder.Services.AddScoped<IAuth, AuthRepository>();  // Authorization / Authentication 
