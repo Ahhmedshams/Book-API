@@ -1,52 +1,58 @@
-﻿//using Book_API.DTO;
-//using Book_API.Helpers;
-//using Book_API.Models;
-//using Book_API.Services;
-//using Microsoft.AspNetCore.Mvc;
+﻿using Book_API.DTO;
+using Book_API.Helpers;
+using Book_API.Models;
+using Book_API.Services;
+using Microsoft.AspNetCore.Mvc;
 
-//namespace Book_API.Controller
-//{
-//    [Route("api/[controller]")]
-//    [ApiController]
-//    public class CategoryController : ControllerBase
-//    {
-//        private readonly ICategory categoriesService;
-//        public CategoryController(ICategory _categoriesService)
-//        {
-//            categoriesService = _categoriesService;
-//        }
-//        [HttpGet]
-//        public async Task<ActionResult<List<CategoryDTO>>> GetCategories()
-//        {
-//            List<Category> categories= await categoriesService.GetAll();
-//            if (categories.Count == 0) return NotFound();
-//            List<CategoryDTO> categoryDTOs = new();
-//            foreach (Category category in categories)
-//                categoryDTOs.Add(category.ToCategoryDTO());
-//            return Ok(categoryDTOs);
-//        }
+namespace Book_API.Controller
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class OrderController : ControllerBase
+    {
+        private readonly IOrder orderService;
+        public OrderController(IOrder _orderService)
+        {
+            orderService = _orderService;
+        }
+        [HttpGet]
+        public async Task<ActionResult<List<Order>>> GetOrders()
+        {
+            List<Order> orders = await orderService.GetAll();
+            if (orders.Count == 0) return NotFound();
+            return Ok(orders);
+        }
 
-//        [HttpGet("{id:int}")]
-//        public async Task<ActionResult<CategoryDTO>> GetCategoryById(int id)
-//        {
-//            Category category = await categoriesService.GetById(id);
-//            if(category == null) return NotFound();
-//            return Ok(category.ToCategoryDTO());
-//        }
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Order>> GetOrderById(int id)
+        {
+            Order order = await orderService.GetById(id);
+            if (order == null) return NotFound();
+            return Ok(order);
+        }
 
-//        [HttpDelete("{id:int}")]
-//        public async Task<ActionResult<CategoryDTO>> DeleteCategoryById(int id)
-//        {
-//            Category category = await categoriesService.Delete(id);
-//            if(category==null) return NotFound();
-//            return Ok(category);
-//        }
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<Order>> DeleteOrderById(int id)
+        {
+            Order order = await orderService.Delete(id);
+            if (order == null) return NotFound();
+            return Ok(order);
+        }
 
-//        [HttpPost]
-//        public async Task<ActionResult<CategoryDTO>> AddCategory(Category category)
-//        {
-//            await categoriesService.Add(category);
-//            return CreatedAtAction("GetCategoryById", category.Id, category);
-//        }
-//    }
-//}
+        [HttpPost]
+        public async Task<ActionResult<Order>> AddOrder(Order order)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            await orderService.Add(order);
+            return CreatedAtAction("GetOrderById", order.Id, order);
+        }
+        [HttpPut]
+        public async Task<ActionResult<Order>> EditOrder(Order order)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            await orderService.Edit(order.Id, order);
+            return Ok(order);
+        }
+
+    }
+}

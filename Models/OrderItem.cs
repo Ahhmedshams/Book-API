@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Book_API.Models
 {
@@ -16,11 +18,11 @@ namespace Book_API.Models
 
         public int Quantity { get; set; }
 
-        [DataType(DataType.Currency)]
-        public Decimal Unitprice { get; set; }
+        [Column(TypeName = "decimal(5,2)")]
+        public decimal Unitprice { get; set; }
 
-        [DataType(DataType.Currency)]
-        public Decimal TotalPrice { get; set; }
+        [Column(TypeName = "decimal(5,2)")]
+        public decimal TotalPrice { get; set; }
 
     }
 }

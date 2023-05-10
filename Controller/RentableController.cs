@@ -47,8 +47,18 @@ namespace Book_API.Controller
         [HttpPost]
         public async Task<ActionResult<RentableBookDTO>> AddBook(RentableBook book)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             await rentableService.Add(book);
             return CreatedAtAction("GetBookById", book.Id, book);
+        }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<RentableBookDTO>> EditBook(int id, RentableBook book)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            RentableBook editedBook = await rentableService.Edit(id, book);
+            if (editedBook == null) return NotFound();
+            return Ok(editedBook.ToRentableBookDTO());
         }
     }
 }
