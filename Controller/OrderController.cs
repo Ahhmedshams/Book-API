@@ -43,8 +43,8 @@ namespace Book_API.Controller
         public async Task<ActionResult<Order>> AddCategory(Order order)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            await orderService.AddAsync(order);
-            return CreatedAtAction("GetOrderById", order.Id, order);
+            Order addedOrder = await orderService.AddAsync(order);
+            return Ok(addedOrder);
         }
 
     }

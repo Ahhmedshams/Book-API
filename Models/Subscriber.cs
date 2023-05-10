@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.DataProtection.KeyManagement;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Book_API.Models
 {
@@ -12,7 +10,6 @@ namespace Book_API.Models
         [ForeignKey("subscriptionType")]
         public int TypeId { get; set; }
 
-        
         public string UserId { get; set; }
 
 

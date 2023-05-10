@@ -48,8 +48,8 @@ namespace Book_API.Controller
         public async Task<ActionResult<RentableBookDTO>> AddBook(RentableBook book)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            await rentableService.AddAsync(book);
-            return CreatedAtAction("GetBookById", book.Id, book);
+            RentableBook addedBook = await rentableService.AddAsync(book);
+            return Ok(addedBook.ToRentableBookDTO());
         }
 
         [HttpPut("{id:int}")]
