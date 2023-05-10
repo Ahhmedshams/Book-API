@@ -22,7 +22,7 @@ namespace Book_API.Controller
         public async Task<IActionResult> Get()
         {
             var subscribers =  await subscriberService.GetAllAsync();
-            if(subscribers.Count == 0) return NotFound();
+            if(!subscribers.Any()) return NotFound();
 
             List<SubscriberResponseDTO> subscribersDTO = new List<SubscriberResponseDTO>(); 
             foreach (var subscriber in subscribers)
