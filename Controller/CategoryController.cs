@@ -18,7 +18,7 @@ namespace Book_API.Controller
         [HttpGet]
         public async Task<ActionResult<List<CategoryDTO>>> GetCategories()
         {
-            List<Category> categories= await categoriesService.GetAll();
+            List<Category> categories= await categoriesService.GetAllAsync();
             if (categories.Count == 0) return NotFound();
             List<CategoryDTO> categoryDTOs = new();
             foreach (Category category in categories)
@@ -29,7 +29,7 @@ namespace Book_API.Controller
         [HttpGet("{id:int}")]
         public async Task<ActionResult<CategoryDTO>> GetCategoryById(int id)
         {
-            Category category = await categoriesService.GetById(id);
+            Category category = await categoriesService.GetByIdAsync(id);
             if(category == null) return NotFound();
             return Ok(category.ToCategoryDTO());
         }
@@ -37,7 +37,7 @@ namespace Book_API.Controller
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<CategoryDTO>> DeleteCategoryById(int id)
         {
-            Category category = await categoriesService.Delete(id);
+            Category category = await categoriesService.DeleteAsync(id);
             if(category==null) return NotFound();
             return Ok(category);
         }
@@ -45,14 +45,14 @@ namespace Book_API.Controller
         [HttpPost]
         public async Task<ActionResult<CategoryDTO>> AddCategory(Category category)
         {
-            await categoriesService.Add(category);
+            await categoriesService.AddAsync(category);
             return CreatedAtAction("GetCategoryById", category.Id, category);
         }
 
         [HttpPut("{id:int}")]
         public async Task<ActionResult<CategoryDTO>> EditCategory(int id, Category category)
         {
-            Category editedCategory = await categoriesService.Edit(id, category);
+            Category editedCategory = await categoriesService.EditAsync(id, category);
             if (editedCategory == null) return NotFound();
             return Ok(editedCategory.ToCategoryDTO());
         }

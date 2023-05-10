@@ -21,7 +21,7 @@ namespace Book_API.Controller
         [HttpGet]
         public async Task<IActionResult> GetAuthors()
         {
-            List<Author> authors = await authorsService.GetAll();
+            List<Author> authors = await authorsService.GetAllAsync();
 
             List<AuthorDTO> authorsDTO = mapper.Map<List<AuthorDTO>>(authors);
 
@@ -34,7 +34,7 @@ namespace Book_API.Controller
             if (id == 0)
                 return BadRequest();
 
-            Author author = await authorsService.GetById(id);
+            Author author = await authorsService.GetByIdAsync(id);
 
             if (author == null)
                 return NotFound();
@@ -49,7 +49,7 @@ namespace Book_API.Controller
             if (ModelState.IsValid)
             {
                 Author authror = mapper.Map<Author>(authorDTO);
-                Author author = await authorsService.Add(authror);
+                Author author = await authorsService.AddAsync(authror);
                 return CreatedAtAction("GetAuthorById", new {Id = authror.Id}, author);
             }
 
@@ -66,7 +66,7 @@ namespace Book_API.Controller
             if (ModelState.IsValid)
             {
                 Author author = mapper.Map<Author>(authorDTO);
-                Author updated = await authorsService.Edit(author.Id, author);
+                Author updated = await authorsService.EditAsync(author.Id, author);
                 return NoContent();
             }
 
@@ -80,7 +80,7 @@ namespace Book_API.Controller
             if (id == 0)
                 return BadRequest();
 
-            await authorsService.Delete(id);
+            await authorsService.DeleteAsync(id);
             return NoContent();
         }
 

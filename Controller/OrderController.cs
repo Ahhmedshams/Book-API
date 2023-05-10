@@ -18,7 +18,7 @@ namespace Book_API.Controller
         [HttpGet]
         public async Task<ActionResult<List<Order>>> GetOrders()
         {
-            List<Order> orders = await orderService.GetAll();
+            List<Order> orders = await orderService.GetAllAsync();
             if (orders.Count == 0) return NotFound();
             return Ok(orders);
         }
@@ -26,7 +26,7 @@ namespace Book_API.Controller
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Order>> GetOrderById(int id)
         {
-            Order order = await orderService.GetById(id);
+            Order order = await orderService.GetByIdAsync(id);
             if (order == null) return NotFound();
             return Ok(order);
         }
@@ -34,7 +34,7 @@ namespace Book_API.Controller
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<Order>> DeleteOrderById(int id)
         {
-            Order order = await orderService.Delete(id);
+            Order order = await orderService.DeleteAsync(id);
             if (order == null) return NotFound();
             return Ok(order);
         }
@@ -42,7 +42,7 @@ namespace Book_API.Controller
         [HttpPost]
         public async Task<ActionResult<Order>> AddCategory(Order order)
         {
-            await orderService.Add(order);
+            await orderService.AddAsync(order);
             return CreatedAtAction("GetOrderById", order.Id, order);
         }
 

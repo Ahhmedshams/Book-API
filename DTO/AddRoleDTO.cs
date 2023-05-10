@@ -9,5 +9,6 @@ namespace Book_API.DTO
 
         [Required]
         public string Role { get; set; }
+        
     }
 }

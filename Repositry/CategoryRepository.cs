@@ -9,9 +9,9 @@ namespace Book_API.Services
         public CategoryRepository(BookifyContextDb context) : base(context) { }
 
         public Task<List<Category>> GetAll() =>
-            base.GetAll(e=>e.Books);
+            base.GetAllAsync(e=>e.Books);
 
         public Task<Category> GetById(int id) =>
-            base.GetById(id, e => e.Books);
+            base.GetByIdAsync(id, e => e.Books);
     }
 }

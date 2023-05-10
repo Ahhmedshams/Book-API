@@ -1,10 +1,7 @@
 ﻿using Book_API.Interfaces;
 using Book_API.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using System.Runtime.InteropServices;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Book_API.Services
 {
@@ -14,41 +11,37 @@ namespace Book_API.Services
         public CRUDRepository(BookifyContextDb _context) {
             context=_context;
         }
-        public async Task<List<T>> GetAll(params Expression<Func<T, object>>[] includes)
+        public async Task<List<T>> GetAllAsync(params Expression<Func<T, object>>[] includes)
         {
+            var query = context.Set<T>().AsQueryable();
             if (includes.Length > 0)
             {
-                var query = context.Set<T>().AsQueryable();
-
                 foreach (var include in includes)
-                {
-                    query = query.Include(include);
-                }
-                return await query.ToListAsync();
+                         query = query.Include(include);
+                  
             }
-            return await context.Set<T>().ToListAsync();
+            return await query.ToListAsync();
         }
-        public async Task<T> GetById(int id, params Expression<Func<T, object>>[] includes)
+        public async Task<T> GetByIdAsync<O> (O id, params Expression<Func<T, object>>[] includes)
         {
+            var query = context.Set<T>().AsQueryable();
             if (includes.Length > 0)
             {
-                var query = context.Set<T>().AsQueryable();
-
                 foreach (var include in includes)
                 {
                     query = query.Include(include);
                 }
-                return await query.FirstOrDefaultAsync(d => EF.Property<int>(d, "Id") == id);
+               // return await query.FirstOrDefaultAsync(d => EF.Property<O>(d, "Id") == id); Need HElp 
             }
             return await context.Set<T>().FindAsync(id);
         }
-        public async Task<T> Add(T entity)
+        public async Task<T> AddAsync(T entity)
         {
             await context.Set<T>().AddAsync(entity);
             await context.SaveChangesAsync();
             return entity;
         }
-        public async Task<T> Delete(int id)
+        public async Task<T> DeleteAsync(int id)
         {
             var foundEntity = await context.Set<T>().FindAsync(id);
             if (foundEntity == null) return null;
@@ -58,7 +51,7 @@ namespace Book_API.Services
 
             return foundEntity;
         }
-        public async Task<T> Edit(int id, T entity)
+        public async Task<T> EditAsync(int id, T entity)
         {
             var foundEntity = await context.Set<T>().FindAsync(id);
             if (foundEntity == null) return null;
@@ -68,5 +61,7 @@ namespace Book_API.Services
 
             return foundEntity;
         }
+
+
     }
 }

@@ -20,7 +20,7 @@ namespace Book_API.Controller
         [HttpGet]
         public async Task<ActionResult<List<RentableBookDTO>>> GetBooks()
         {
-            List<RentableBook> books = await rentableService.GetAll();
+            List<RentableBook> books = await rentableService.GetAllAsync();
             if (books.Count == 0) return NotFound();
             List<RentableBookDTO> booksDTOs = new();
             foreach (RentableBook book in books)
@@ -31,7 +31,7 @@ namespace Book_API.Controller
         [HttpGet("{id:int}")]
         public async Task<ActionResult<RentableBookDTO>> GetBookById(int id)
         {
-            RentableBook book = await rentableService.GetById(id);
+            RentableBook book = await rentableService.GetByIdAsync(id);
             if (book == null) return NotFound();
             return Ok(book.ToRentableBookDTO());
         }
@@ -39,7 +39,7 @@ namespace Book_API.Controller
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<RentableBook>> DeleteBookById(int id)
         {
-            RentableBook book = await rentableService.Delete(id);
+            RentableBook book = await rentableService.DeleteAsync(id);
             if (book == null) return NotFound();
             return Ok(book);
         }
@@ -47,14 +47,14 @@ namespace Book_API.Controller
         [HttpPost]
         public async Task<ActionResult<RentableBookDTO>> AddBook(RentableBook book)
         {
-            await rentableService.Add(book);
+            await rentableService.AddAsync(book);
             return CreatedAtAction("GetBookById", book.Id, book);
         }
 
         [HttpPut("{id:int}")]
         public async Task<ActionResult<RentableBookDTO>> EditBook(int id, RentableBook book)
         {
-            RentableBook editedBook = await rentableService.Edit(id, book);
+            RentableBook editedBook = await rentableService.EditAsync(id, book);
             if (editedBook == null) return NotFound();
             return Ok(editedBook.ToRentableBookDTO());
         }

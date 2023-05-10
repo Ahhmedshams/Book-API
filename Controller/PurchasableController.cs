@@ -18,7 +18,7 @@ namespace Book_API.Controller
         [HttpGet]
         public async Task<ActionResult<List<PurchasableBookDTO>>> GetBooks()
         {
-            List<PurchasableBook> books = await purchasableService.GetAll();
+            List<PurchasableBook> books = await purchasableService.GetAllAsync();
             if (books.Count == 0) return NotFound();
             List<PurchasableBookDTO> booksDTOs = new();
             foreach (PurchasableBook book in books)
@@ -29,7 +29,7 @@ namespace Book_API.Controller
         [HttpGet("{id:int}")]
         public async Task<ActionResult<PurchasableBookDTO>> GetBookById(int id)
         {
-            PurchasableBook book = await purchasableService.GetById(id);
+            PurchasableBook book = await purchasableService.GetByIdAsync(id);
             if (book == null) return NotFound();
             return Ok(book.ToPurchasableBookDTO());
         }
@@ -37,7 +37,7 @@ namespace Book_API.Controller
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<PurchasableBook>> DeleteBookById(int id)
         {
-            PurchasableBook book = await purchasableService.Delete(id);
+            PurchasableBook book = await purchasableService.DeleteAsync(id);
             if (book == null) return NotFound();
             return Ok(book);
         }
@@ -45,14 +45,14 @@ namespace Book_API.Controller
         [HttpPost]
         public async Task<ActionResult<PurchasableBookDTO>> AddBook(PurchasableBook book)
         {
-            await purchasableService.Add(book);
+            await purchasableService.AddAsync(book);
             return CreatedAtAction("GetBookById", book.Id, book);
         }
 
         [HttpPut("{id:int}")]
         public async Task<ActionResult<PurchasableBookDTO>> EditBook(int id,PurchasableBook book)
         {
-            PurchasableBook editedBook = await purchasableService.Edit(id, book);
+            PurchasableBook editedBook = await purchasableService.EditAsync(id, book);
             if(editedBook == null) return NotFound();
             return Ok(editedBook.ToPurchasableBookDTO());
         }

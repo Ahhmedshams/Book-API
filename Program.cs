@@ -35,11 +35,10 @@ namespace Book_API
             builder.Services.AddScoped<IRentable, RentableRepository>();
             builder.Services.AddScoped<IPurchasable, PurchasableRepository>();
 
-            builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<ISubscribable, SubscriberService>();
             builder.Services.AddScoped<IApplicationUser, ApplicationUserService>();
 
-            builder.Services.AddScoped<IAuth, AuthRepository>();
+            builder.Services.AddScoped<IAuth, AuthRepository>();  // Authorization / Authentication 
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             
