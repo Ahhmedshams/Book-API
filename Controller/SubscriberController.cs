@@ -52,15 +52,16 @@ namespace Book_API.Controller
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddSubscriber (Subscriber subscriberDTO)
+        public async Task<IActionResult> AddSubscriber (Subscriber subscriber)
         {
            if(!ModelState.IsValid) return BadRequest(ModelState);
 
-           var AppUser =   await user.GetByIdAsync(subscriberDTO.UserId );
+           var AppUser =   await user.GetByIdAsync(subscriber.UserId );
            if(AppUser == null) return NotFound("Can Not Found User With this ID");
 
-           var sub =   await subscriberService.AddAsync(subscriberDTO);
-            return Ok(sub);
+           var sub =   await subscriberService.AddAsync(subscriber);
+            return CreatedAtAction("GetById", sub.Id, sub);
+
         }
 
 

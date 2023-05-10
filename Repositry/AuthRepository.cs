@@ -60,7 +60,8 @@ namespace Book_API.Services
                 IsAuthenticated = true,
                 Roles = new List<string> { "User" },
                 Token = new JwtSecurityTokenHandler().WriteToken(userToken),
-                Username = user.UserName
+                Username = user.UserName,
+                Message = "Congratulation You Are Not A Robot"
             };
         }
 
@@ -88,6 +89,8 @@ namespace Book_API.Services
             authModel.Username = user.UserName;
             authModel.ExpiresOn = userToken.ValidTo;
             authModel.Roles = rolesList.ToList();
+            authModel.Message = "Congratulation You Are Not A Robot";
+
 
             return authModel;
         }
