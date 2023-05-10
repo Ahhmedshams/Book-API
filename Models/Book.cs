@@ -7,7 +7,7 @@ public abstract class Book : Entity
     [Required]
     public string Title { get; set; }
     public int NumberOfPages{ get; set; }
-    public List<Category> Categories { get; set; }
+    public List<Category> Categories { get; set; } = new List<Category>();
     public byte[] Image { get; set; }
     public Author Author { get; set; }
     public int AuthorId { get; set; }

@@ -17,7 +17,7 @@ namespace Book_API.Models
 
         [Column(TypeName ="decimal(5,2)")]
         public decimal TotalPrice { get; set; }
-        public List<OrderItem> Items { get; set; }
+        public List<OrderItem> Items { get; set; } = new List<OrderItem>();
     }
 }
 
