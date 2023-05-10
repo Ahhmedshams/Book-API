@@ -3,9 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Book_API.Models
 {
-    public class SubscriptionType
+    public class SubscriptionType : Entity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
 
         [Column(TypeName = "decimal(5,2)")]

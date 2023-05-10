@@ -2,9 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public abstract class Book
+public abstract class Book : Entity
 {
-    public int Id { get; set; }
     public string Title { get; set; }
     public int NumberOfPages{ get; set; }
     public List<Category> Categories { get; set; }

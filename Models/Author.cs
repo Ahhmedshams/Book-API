@@ -2,10 +2,8 @@
 
 namespace Book_API.Models
 {
-    public class Author
-    {
-        public int Id { get; set; }
-        
+    public class Author : Entity
+    {   
         public string Name { get; set; }
 
         public string Biographpy { get; set; }

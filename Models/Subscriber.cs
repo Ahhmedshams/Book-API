@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Book_API.Models
 {
-    public class Subscriber
+    public class Subscriber : Entity
     {
-        [Key]
-        public int Id { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 

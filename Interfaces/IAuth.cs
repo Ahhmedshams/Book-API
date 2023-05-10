@@ -1,9 +1,9 @@
 ﻿using Book_API.DTO;
 using Book_API.Models;
 
-namespace Book_API.Services
+namespace Book_API.Interfaces
 {
-    public interface IAuthService
+    public interface IAuth
     {
         Task<AuthModel> RegisterAsync(RegisterUserDTO model);
         Task<AuthModel> GetTokenAsync(LoginDTO model);

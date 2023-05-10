@@ -1,7 +1,7 @@
 ﻿using Book_API.DTO;
 using Book_API.Helpers;
+using Book_API.Interfaces;
 using Book_API.Models;
-using Book_API.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Book_API.Controller
@@ -45,7 +45,6 @@ namespace Book_API.Controller
         [HttpPost]
         public async Task<ActionResult<CategoryDTO>> AddCategory(Category category)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
             await categoriesService.Add(category);
             return CreatedAtAction("GetCategoryById", category.Id, category);
         }
@@ -53,7 +52,6 @@ namespace Book_API.Controller
         [HttpPut("{id:int}")]
         public async Task<ActionResult<CategoryDTO>> EditCategory(int id, Category category)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
             Category editedCategory = await categoriesService.Edit(id, category);
             if (editedCategory == null) return NotFound();
             return Ok(editedCategory.ToCategoryDTO());
