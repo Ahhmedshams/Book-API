@@ -42,6 +42,7 @@ namespace Book_API.Controller
         [HttpPost]
         public async Task<ActionResult<Order>> AddCategory(Order order)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             await orderService.AddAsync(order);
             return CreatedAtAction("GetOrderById", order.Id, order);
         }

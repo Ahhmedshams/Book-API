@@ -47,6 +47,7 @@ namespace Book_API.Controller
         [HttpPost]
         public async Task<ActionResult<RentableBookDTO>> AddBook(RentableBook book)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             await rentableService.AddAsync(book);
             return CreatedAtAction("GetBookById", book.Id, book);
         }
