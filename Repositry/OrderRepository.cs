@@ -8,10 +8,10 @@ namespace Book_API.Services
     {
         public OrderRepository(BookifyContextDb context) : base(context) { }
 
-        public Task<List<Order>> GetAll() =>
+        public Task<List<Order>> GetAllAsync() =>
             base.GetAllAsync(e => e.User);
 
-        public Task<Order> GetById(int id) =>
+        public Task<Order> GetByIdAsync(int id) =>
            base.GetByIdAsync(id, e => e.User);
     }
 }

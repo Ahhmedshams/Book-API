@@ -8,10 +8,10 @@ namespace Book_API.Services
     {
         public CategoryRepository(BookifyContextDb context) : base(context) { }
 
-        public Task<List<Category>> GetAll() =>
+        public Task<List<Category>> GetAllAsync() =>
             base.GetAllAsync(e=>e.Books);
 
-        public Task<Category> GetById(int id) =>
+        public Task<Category> GetByIdAsync(int id) =>
             base.GetByIdAsync(id, e => e.Books);
     }
 }

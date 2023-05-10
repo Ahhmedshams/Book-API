@@ -9,10 +9,10 @@ namespace Book_API.Services
     {
         public PurchasableRepository(BookifyContextDb context):base(context) { }
 
-        public Task<List<PurchasableBook>> GetAll() =>
+        public Task<List<PurchasableBook>> GetAllAsync() =>
             base.GetAllAsync(e=>e.Author,e=>e.Categories);
 
-        public Task<PurchasableBook> GetById(int id) =>
+        public Task<PurchasableBook> GetByIdAsync(int id) =>
             base.GetByIdAsync(id, e => e.Author, e => e.Categories);
     }
 }

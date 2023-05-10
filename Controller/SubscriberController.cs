@@ -1,6 +1,7 @@
 ﻿using Book_API.DTO;
 using Book_API.Helpers;
 using Book_API.Interfaces;
+using Book_API.Models;
 using Book_API.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -51,7 +52,7 @@ namespace Book_API.Controller
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddSubscriber ( SubscriberDTO subscriberDTO)
+        public async Task<IActionResult> AddSubscriber (Subscriber subscriberDTO)
         {
            if(!ModelState.IsValid) return BadRequest(ModelState);
 
