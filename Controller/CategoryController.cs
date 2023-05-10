@@ -46,8 +46,8 @@ namespace Book_API.Controller
         public async Task<ActionResult<CategoryDTO>> AddCategory(Category category)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            await categoriesService.AddAsync(category);
-            return CreatedAtAction("GetCategoryById", category.Id, category);
+            Category addedCategory= await categoriesService.AddAsync(category);
+            return Ok(addedCategory.ToCategoryDTO());
         }
 
         [HttpPut("{id:int}")]

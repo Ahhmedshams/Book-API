@@ -46,14 +46,9 @@ namespace Book_API.Controller
         [HttpPost]
         public async Task<IActionResult> Create(AuthorDTO authorDTO)
         {
-            if (ModelState.IsValid)
-            {
-                Author authror = mapper.Map<Author>(authorDTO);
-                Author author = await authorsService.AddAsync(authror);
-                return CreatedAtAction("GetAuthorById", new {Id = authror.Id}, author);
-            }
-
-            return BadRequest(ModelState);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            Author authror = mapper.Map<Author>(authorDTO);
+            return Ok(await authorsService.AddAsync(authror));
         }
 
         [HttpPut]

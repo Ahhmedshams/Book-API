@@ -1,6 +1,5 @@
 ﻿using Book_API.Interfaces;
 using Book_API.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace Book_API.Services
 {

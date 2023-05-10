@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 public abstract class Book : Entity
 {
+    [Required]
     public string Title { get; set; }
     public int NumberOfPages{ get; set; }
     public List<Category> Categories { get; set; }
