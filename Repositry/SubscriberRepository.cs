@@ -11,6 +11,11 @@ namespace Book_API.Repositry
 
         public SubscriberRepository(BookifyContextDb context) :base(context) { }
 
-       
+        public Task<List<Subscriber>> GetAllAsync() =>
+                base.GetAllAsync(e => e.User);
+
+        public Task<Subscriber> GetByIdAsync(int id) =>
+            base.GetByIdAsync(id, e => e.User);
+
     }
 }

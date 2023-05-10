@@ -1,6 +1,7 @@
 ﻿using Book_API.Interfaces;
 using Book_API.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
 
 namespace Book_API.Services
 {
@@ -15,3 +16,5 @@ namespace Book_API.Services
            base.GetByIdAsync(id, e => e.User);
     }
 }
+
+
