@@ -1,5 +1,6 @@
 ﻿using Book_API.DTO;
 using Book_API.Helpers;
+using Book_API.Interfaces;
 using Book_API.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
@@ -10,13 +11,13 @@ using System.Text;
 
 namespace Book_API.Services
 {
-    public class AuthService:IAuthService
+    public class AuthRepository:IAuth
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly JWT _jwt;
 
-        public AuthService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IOptions<JWT> jwt)
+        public AuthRepository(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IOptions<JWT> jwt)
         {
             _userManager = userManager;
             _roleManager = roleManager;

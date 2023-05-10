@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Book_API.DTO;
+using Book_API.Interfaces;
 using Book_API.Models;
-using Book_API.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Book_API.Controller
@@ -11,9 +11,9 @@ namespace Book_API.Controller
     public class AuthorController : ControllerBase
     {
         private readonly IMapper mapper;
-        private readonly IAuthorService authorsService;
+        private readonly IAuthor authorsService;
 
-        public AuthorController(IMapper mapper, IAuthorService authorsService) {
+        public AuthorController(IMapper mapper, IAuthor authorsService) {
             this.mapper=mapper;
             this.authorsService=authorsService;
         }

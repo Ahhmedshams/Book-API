@@ -1,7 +1,7 @@
 ﻿using Book_API.DTO;
 using Book_API.Helpers;
+using Book_API.Interfaces;
 using Book_API.Models;
-using Book_API.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Book_API.Controller
@@ -40,18 +40,10 @@ namespace Book_API.Controller
         }
 
         [HttpPost]
-        public async Task<ActionResult<Order>> AddOrder(Order order)
+        public async Task<ActionResult<Order>> AddCategory(Order order)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
             await orderService.Add(order);
             return CreatedAtAction("GetOrderById", order.Id, order);
-        }
-        [HttpPut]
-        public async Task<ActionResult<Order>> EditOrder(Order order)
-        {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-            await orderService.Edit(order.Id, order);
-            return Ok(order);
         }
 
     }

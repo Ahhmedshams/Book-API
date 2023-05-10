@@ -1,4 +1,5 @@
 using Book_API.Helpers;
+using Book_API.Interfaces;
 using Book_API.Models;
 using Book_API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -28,13 +29,13 @@ namespace Book_API
 
             });
 
-            builder.Services.AddScoped<ICategory, CategoryService>();
-            builder.Services.AddScoped<IAuthorService, AuthorsService>();
-            builder.Services.AddScoped<IPurchasable, PurchasableService>();
-            builder.Services.AddScoped<IRentable, RentableService>();
-            builder.Services.AddScoped<IOrder, OrderService>();
+            builder.Services.AddScoped<ICategory, CategoryRepository>();
+            builder.Services.AddScoped<IAuthor, AuthorsRepositry>();
+            builder.Services.AddScoped<IPurchasable, PurchasableRepository>();
+            builder.Services.AddScoped<IRentable, RentableRepository>();
+            builder.Services.AddScoped<IOrder, OrderRepository>();
 
-            builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<IAuth, AuthRepository>();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             

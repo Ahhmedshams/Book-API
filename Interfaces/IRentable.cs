@@ -1,0 +1,7 @@
+﻿using Book_API.Models;
+
+namespace Book_API.Interfaces
+{
+    public interface IRentable : ICRUD<RentableBook>
+    {}
+}

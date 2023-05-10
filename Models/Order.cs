@@ -3,9 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Book_API.Models
 {
-    public class Order
+    public class Order : Entity
     {
-        public int Id { get; set; }
         public ApplicationUser User { get; set; }
         [ForeignKey("User")]
         public string UserId { get; set; }

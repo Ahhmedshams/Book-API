@@ -1,5 +1,5 @@
 ﻿using Book_API.DTO;
-using Book_API.Services;
+using Book_API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -9,9 +9,9 @@ namespace Book_API.Controller
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly IAuthService _authService;
+        private readonly IAuth _authService;
 
-        public AccountController (IAuthService authService)
+        public AccountController (IAuth authService)
         {
             _authService = authService;
         }
