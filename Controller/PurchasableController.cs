@@ -45,6 +45,7 @@ namespace Book_API.Controller
         [HttpPost]
         public async Task<ActionResult<PurchasableBookDTO>> AddBook(PurchasableBook book)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             await purchasableService.Add(book);
             return CreatedAtAction("GetBookById", book.Id, book);
         }
@@ -52,6 +53,7 @@ namespace Book_API.Controller
         [HttpPut("{id:int}")]
         public async Task<ActionResult<PurchasableBookDTO>> EditBook(int id,PurchasableBook book)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             PurchasableBook editedBook = await purchasableService.Edit(id, book);
             if(editedBook == null) return NotFound();
             return Ok(editedBook.ToPurchasableBookDTO());
