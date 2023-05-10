@@ -46,8 +46,11 @@ namespace Book_API.Helpers
                 AvailableCopies = book.AvailableCopies,
                 NumberOfCopies = book.NumberOfCopies,
             };
-            foreach (Category category in book.Categories)
-                RBD.Categories.Add(category.Name);
+            if (book.Categories.Count > 0)
+            {
+                foreach (Category category in book.Categories)
+                    RBD.Categories.Add(category.Name);
+            }
             return RBD;
         }
 
