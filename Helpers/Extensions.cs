@@ -8,8 +8,11 @@ namespace Book_API.Helpers
         static public CategoryDTO ToCategoryDTO(this Category category)
         {
             CategoryDTO CD = new CategoryDTO() { Id = category.Id, Name = category.Name };
+            if (category.Books.Count>0)
+            {
             foreach (Book book in category.Books)
                 CD.Books.Add(book.Title);
+            }
             return CD;
         }
         static public PurchasableBookDTO ToPurchasableBookDTO(this PurchasableBook book)
@@ -24,8 +27,11 @@ namespace Book_API.Helpers
                 NumberOfPages = book.NumberOfPages,
                 Quantity = book.Quantity
             };
-            foreach (Category category in book.Categories)
-                PBD.Categories.Add(category.Name);
+            if(book.Categories.Count>0)
+            {
+                foreach (Category category in book.Categories)
+                    PBD.Categories.Add(category.Name);
+            }
             return PBD;
         }
         static public RentableBookDTO ToRentableBookDTO(this RentableBook book)
