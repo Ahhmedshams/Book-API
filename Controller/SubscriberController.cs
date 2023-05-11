@@ -14,7 +14,7 @@ namespace Book_API.Controller
 
         private ISubscribable subscriberService;
         private IApplicationUser user;
-        public SubscriberController (ISubscribable subscriberService , IApplicationUser _user)
+        public SubscriberController(ISubscribable subscriberService, IApplicationUser _user)
         {
             this.subscriberService = subscriberService;
             this.user = _user;
@@ -23,10 +23,10 @@ namespace Book_API.Controller
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var subscribers =  await subscriberService.GetAllAsync();
-            if(!subscribers.Any()) return NotFound();
+            var subscribers = await subscriberService.GetAllAsync();
+            if (!subscribers.Any()) return NotFound("Not Found");
 
-            List<SubscriberResponseDTO> subscribersDTO = new List<SubscriberResponseDTO>(); 
+            List<SubscriberResponseDTO> subscribersDTO = new List<SubscriberResponseDTO>();
             foreach (var subscriber in subscribers)
             {
                 subscribersDTO.Add(subscriber.ToSubResponse());
@@ -36,31 +36,31 @@ namespace Book_API.Controller
         }
 
         [HttpGet("{Id:int}")]
-        public async Task<IActionResult> GetById( int id )
+        public async Task<IActionResult> GetById(int id)
         {
             var subscriber = await subscriberService.GetByIdAsync(id);
-            if(subscriber == null) return NotFound();
+            if (subscriber == null) return NotFound("Not Found");
             return Ok(subscriber.ToSubResponse());
         }
 
         [HttpDelete("{id:int}")]
-        public async Task<IActionResult> Delete (int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var subscriber = await subscriberService.DeleteAsync(id);
-            if(subscriber == null) return NotFound();
+            if (subscriber == null) return NotFound("Not Found");
             return Ok(subscriber.ToSubResponse());
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddSubscriber (Subscriber subscriber)
+        public async Task<IActionResult> AddSubscriber(SubscriberDTO subscriber)
         {
-           if(!ModelState.IsValid) return BadRequest(ModelState);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-           var AppUser =   await user.GetByIdAsync(subscriber.UserId );
-           if(AppUser == null) return NotFound("Can Not Found User With this ID");
+            var AppUser = await user.GetByIdAsync(subscriber.UserId);
+            if (AppUser == null) return NotFound("Can Not Found User With this ID");
 
-           var sub =   await subscriberService.AddAsync(subscriber);
-            return CreatedAtAction("GetById", sub.Id, sub);
+            var sub = await subscriberService.AddAsync(subscriber.ToSubscriber());
+            return Ok(sub);
 
         }
 

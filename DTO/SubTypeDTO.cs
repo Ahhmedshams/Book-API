@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Book_API.Models
+namespace Book_API.DTO
 {
-    public class SubscriptionType : Entity
+    public class SubTypeDTO
     {
         public string Name { get; set; }
 
@@ -12,7 +12,5 @@ namespace Book_API.Models
         public string Description { get; set; }
 
         public int NumberOfBooks { get; set; }
-        public IEnumerable<Subscriber> subscribers { get; set; }
-
     }
 }

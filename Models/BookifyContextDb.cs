@@ -24,6 +24,7 @@ namespace Book_API.Models
         public virtual DbSet<RentableBook> RentableBooks { get; set; }
 
         public virtual DbSet<Subscriber> Subscribers { get; set; }
+        public virtual DbSet<SubscriptionType> SubscriptionTypes { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

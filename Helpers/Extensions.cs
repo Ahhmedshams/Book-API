@@ -8,7 +8,7 @@ namespace Book_API.Helpers
         static public CategoryDTO ToCategoryDTO(this Category category)
         {
             CategoryDTO CD = new CategoryDTO() { Id = category.Id, Name = category.Name };
-            if (category.Books.Count>0)
+            if (category.Books.Any())
             {
             foreach (Book book in category.Books)
                 CD.Books.Add(book.Title);
@@ -115,6 +115,20 @@ namespace Book_API.Helpers
 
             };
             return applicationUserDTO;
+        }
+
+        public static SubscriptionType ToASubscriptionType(this SubTypeDTO subTypeDTO)
+        {
+            SubscriptionType subscriptionType = new()
+            {
+                Name = subTypeDTO.Name,
+                Price = subTypeDTO.Price,
+                NumberOfBooks = subTypeDTO.NumberOfBooks,
+                Description = subTypeDTO.Description,
+                
+
+            };
+            return subscriptionType;
         }
 
 

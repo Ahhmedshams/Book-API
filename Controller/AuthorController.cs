@@ -13,9 +13,10 @@ namespace Book_API.Controller
         private readonly IMapper mapper;
         private readonly IAuthor authorsService;
 
-        public AuthorController(IMapper mapper, IAuthor authorsService) {
-            this.mapper=mapper;
-            this.authorsService=authorsService;
+        public AuthorController(IMapper mapper, IAuthor authorsService)
+        {
+            this.mapper = mapper;
+            this.authorsService = authorsService;
         }
 
         [HttpGet]

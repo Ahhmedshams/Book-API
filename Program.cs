@@ -41,6 +41,8 @@ namespace Book_API
 
             builder.Services.AddScoped<IAuth, AuthRepository>();  // Authorization / Authentication 
 
+            builder.Services.AddScoped<ISubType,  SubTypeRepository>();
+
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             
             //Identity

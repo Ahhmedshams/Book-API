@@ -18,7 +18,7 @@ namespace Book_API.Controller
         [HttpGet]
         public async Task<ActionResult<List<CategoryDTO>>> GetCategories()
         {
-            List<Category> categories= await categoriesService.GetAllAsync();
+            List<Category> categories = await categoriesService.GetAllAsync();
             if (categories.Count == 0) return NotFound();
             List<CategoryDTO> categoryDTOs = new();
             foreach (Category category in categories)
@@ -30,7 +30,7 @@ namespace Book_API.Controller
         public async Task<ActionResult<CategoryDTO>> GetCategoryById(int id)
         {
             Category category = await categoriesService.GetByIdAsync(id);
-            if(category == null) return NotFound();
+            if (category == null) return NotFound();
             return Ok(category.ToCategoryDTO());
         }
 
@@ -38,7 +38,7 @@ namespace Book_API.Controller
         public async Task<ActionResult<CategoryDTO>> DeleteCategoryById(int id)
         {
             Category category = await categoriesService.DeleteAsync(id);
-            if(category==null) return NotFound();
+            if (category == null) return NotFound();
             return Ok(category);
         }
 
@@ -46,7 +46,7 @@ namespace Book_API.Controller
         public async Task<ActionResult<CategoryDTO>> AddCategory(Category category)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            Category addedCategory= await categoriesService.AddAsync(category);
+            Category addedCategory = await categoriesService.AddAsync(category);
             return Ok(addedCategory.ToCategoryDTO());
         }
 

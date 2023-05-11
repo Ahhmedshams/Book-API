@@ -7,7 +7,7 @@ namespace Book_API.Services
 {
     public class CRUDRepository<T> : ICRUD<T> where T : class
     {
-        private readonly BookifyContextDb context;
+        protected readonly BookifyContextDb context;
         public CRUDRepository(BookifyContextDb _context) {
             context=_context;
         }

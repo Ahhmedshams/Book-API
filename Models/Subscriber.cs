@@ -13,7 +13,7 @@ namespace Book_API.Models
         public string UserId { get; set; }
 
 
-        [ ForeignKey("UserId")]
+        [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
 
         public IEnumerable<Rent> Rents { get; set; }

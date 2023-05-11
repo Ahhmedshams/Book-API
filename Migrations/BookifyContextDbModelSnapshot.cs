@@ -285,7 +285,7 @@ namespace Book_API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SubscriptionType");
+                    b.ToTable("SubscriptionTypes");
                 });
 
             modelBuilder.Entity("BookCategory", b =>

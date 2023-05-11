@@ -9,12 +9,21 @@ namespace Book_API.Controller
     public class UserController : ControllerBase
     {
         private IApplicationUser applicationUser;
-        public UserController(IApplicationUser _applicationUser) 
+        public UserController(IApplicationUser _applicationUser)
         {
             this.applicationUser = _applicationUser;
         }
 
-        [HttpGet("Id:string")]
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var users = await applicationUser.GetAllAsync();
+            if (!users.Any()) return NotFound("Not Found");
+            return Ok(users);
+        }
+
+
+        [HttpGet("{Id:Guid}")]
         public async Task<IActionResult> GetById(string id)
         {
             var user = await applicationUser.GetByIdAsync(id);
