@@ -51,17 +51,15 @@ namespace Book_API.Services
 
             return foundEntity;
         }
-        public async Task<T> EditAsync(int id, T entity)
+        public async Task<T> EditAsync<O>(O id, T entity, Expression<Func<T, O>> keySelector)
         {
             var foundEntity = await context.Set<T>().FindAsync(id);
             if (foundEntity == null) return null;
-
+            context.Entry(entity).Property(keySelector).CurrentValue = id;
             context.Entry(foundEntity).CurrentValues.SetValues(entity);
             await context.SaveChangesAsync();
-
             return foundEntity;
         }
-
 
     }
 }

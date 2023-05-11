@@ -55,7 +55,7 @@ namespace Book_API.Controller
         [HttpPut("{id:int}")]
         public async Task<ActionResult<RentableBookDTO>> EditBook(int id, RentableBook book)
         {
-            RentableBook editedBook = await rentableService.EditAsync(id, book);
+            RentableBook editedBook = await rentableService.EditAsync(id, book,e=>e.Id);
             if (editedBook == null) return NotFound();
             return Ok(editedBook.ToRentableBookDTO());
         }

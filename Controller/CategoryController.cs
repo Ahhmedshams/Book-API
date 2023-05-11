@@ -53,7 +53,7 @@ namespace Book_API.Controller
         [HttpPut("{id:int}")]
         public async Task<ActionResult<CategoryDTO>> EditCategory(int id, Category category)
         {
-            Category editedCategory = await categoriesService.EditAsync(id, category);
+            Category editedCategory = await categoriesService.EditAsync(id, category,e=>e.Id);
             if (editedCategory == null) return NotFound();
             return Ok(editedCategory.ToCategoryDTO());
         }

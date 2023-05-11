@@ -55,7 +55,7 @@ namespace Book_API.Controller
         public async Task<IActionResult> Edit(int id,SubscriptionType Suptype)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            var sub = await subType.EditAsync(id,Suptype);
+            var sub = await subType.EditAsync(id,Suptype,e=>e.Id);
             return Ok(sub);
         }
     }

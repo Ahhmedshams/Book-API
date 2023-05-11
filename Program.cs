@@ -25,8 +25,8 @@ namespace Book_API
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddDbContext<BookifyContextDb>(options => {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("Connection1"));
-                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Connection2"));
+                //options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
             });
 

@@ -62,7 +62,7 @@ namespace Book_API.Controller
             if (ModelState.IsValid)
             {
                 Author author = mapper.Map<Author>(authorDTO);
-                Author updated = await authorsService.EditAsync(author.Id, author);
+                Author updated = await authorsService.EditAsync(author.Id, author,e=>e.Id);
                 return NoContent();
             }
 
