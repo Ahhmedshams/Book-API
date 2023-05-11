@@ -58,7 +58,8 @@ namespace Book_API.Controller
 
             var AppUser = await user.GetByIdAsync(subscriber.UserId);
             if (AppUser == null) return NotFound("Can Not Found User With this ID");
-
+                AppUser.IsSubscriber = true;
+             var userUpdate = await  user.EditAsync(AppUser.Id, AppUser);
             var sub = await subscriberService.AddAsync(subscriber.ToSubscriber());
             return Ok(sub);
 

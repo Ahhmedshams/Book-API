@@ -16,17 +16,21 @@ namespace Book_API.Services
             _userManager = userManager;
         }
 
-        public async Task<ApplicationUserDTO> GetByIdAsync(string id)
+        public async Task<ApplicationUser> GetByIdAsync(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
             if (user == null) return null;
             
-            return user.ToApplicationUserDTO();
+            return user;
         }
 
-        public Task<ApplicationUserDTO> EditAsync(int id, ApplicationUser user)
+        public async Task<ApplicationUser> EditAsync(string id, ApplicationUser Appuser)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null) return null;
+            var reselt = await _userManager.UpdateAsync(Appuser);
+            if (reselt.Succeeded) return Appuser;
+            else return null;
         }
 
         public async Task<List<ApplicationUserDTO>> GetAllAsync()
@@ -41,6 +45,8 @@ namespace Book_API.Services
 
             return users;
         }
+
+       
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using Book_API.Services;
+﻿using Book_API.Helpers;
+using Book_API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,7 +29,7 @@ namespace Book_API.Controller
         {
             var user = await applicationUser.GetByIdAsync(id);
             if (user == null) return NotFound();
-            return Ok(user);
+            return Ok(user.ToApplicationUserDTO());
         }
 
 

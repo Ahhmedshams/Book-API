@@ -11,5 +11,7 @@ namespace Book_API.Models
         public string LastName { get; set; }
 
         public byte[] ProfilePicture { get; set; }
+
+        public bool IsSubscriber { get; set; }
     }
 }
