@@ -40,11 +40,19 @@ namespace Book_API.Controller
         }
 
         [HttpPost]
-        public async Task<ActionResult<Order>> AddCategory(Order order)
+        public async Task<ActionResult<Order>> AddOrder(Order order)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             Order addedOrder = await orderService.AddAsync(order);
             return Ok(addedOrder);
+        }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<Order>> EditBook(int id, Order order)
+        {
+            Order editedOrder = await orderService.EditAsync(id, order, e => e.Id);
+            if (editedOrder == null) return NotFound();
+            return Ok(editedOrder);
         }
 
     }

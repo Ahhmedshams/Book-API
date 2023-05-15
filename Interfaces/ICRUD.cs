@@ -7,7 +7,7 @@ namespace Book_API.Interfaces
     {
         Task<T> AddAsync(T entry);
         Task<T> DeleteAsync(int id);
-        Task<T> EditAsync(int id, T entry);
+        Task<T> EditAsync<O>(O id, T entity, Expression<Func<T, O>> keySelector);
         Task<List<T>> GetAllAsync(params Expression<Func<T, object>>[] includes);
         Task<T> GetByIdAsync<O>(O id, params Expression<Func<T, object>>[] includes);
     }
