@@ -27,7 +27,6 @@ namespace Book_API
             builder.Services.AddDbContext<BookifyContextDb>(options => {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Connection2"));
                 //options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-
             });
 
             builder.Services.AddScoped<ICategory, CategoryRepository>();
@@ -82,15 +81,10 @@ namespace Book_API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
             app.UseHttpsRedirection();
-
             app.UseAuthentication();
             app.UseAuthorization();
-
-
             app.MapControllers();
-
             app.Run();
         }
     }

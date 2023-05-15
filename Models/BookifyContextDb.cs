@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Book_API.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.Contracts;
@@ -14,6 +15,7 @@ namespace Book_API.Models
 
         public BookifyContextDb(DbContextOptions<BookifyContextDb> options) : base(options) { }
 
+        #region Models DbSet
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Author> Authors { get; set; }
@@ -21,7 +23,8 @@ namespace Book_API.Models
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderItem> OrderItems { get; set; }
         public virtual DbSet<PurchasableBook> PurchasableBooks { get; set; }
-        public virtual DbSet<RentableBook> RentableBooks { get; set; }
+        public virtual DbSet<RentableBook> RentableBooks { get; set; } 
+        #endregion
 
         public virtual DbSet<Subscriber> Subscribers { get; set; }
         public virtual DbSet<SubscriptionType> SubscriptionTypes { get; set; }
@@ -33,6 +36,16 @@ namespace Book_API.Models
             modelBuilder.Entity<Author>().Property(e => e.Image).HasColumnType("VarBinary");
             modelBuilder.Entity<Book>().Property(e => e.Image).HasColumnType("VarBinary");
 
+            #region Soft Delete
+            modelBuilder.Entity<Author>().HasQueryFilter(e => !e.IsDeleted);
+            modelBuilder.Entity<Category>().HasQueryFilter(e => !e.IsDeleted);
+            modelBuilder.Entity<Book>().HasQueryFilter(e => !e.IsDeleted);
+            modelBuilder.Entity<Order>().HasQueryFilter(e => !e.IsDeleted);
+            modelBuilder.Entity<OrderItem>().HasQueryFilter(e => !e.IsDeleted);
+            modelBuilder.Entity<PurchasableBook>().HasQueryFilter(e => !e.IsDeleted);
+            modelBuilder.Entity<RentableBook>().HasQueryFilter(e => !e.IsDeleted);
+            modelBuilder.Entity<Rent>().HasQueryFilter(e => !e.IsDeleted); 
+            #endregion
 
 
             //change Identity Table name in Data base 
@@ -46,7 +59,37 @@ namespace Book_API.Models
 
         }
 
-        
+        public override int SaveChanges()
+        {
+            foreach (var entry in ChangeTracker.Entries())
+            {
+                if (entry.Entity is IEntity)
+                {
+                    switch (entry.State)
+                    {
+                        case EntityState.Added:
+                            {
+                                entry.CurrentValues["TimeCreated"] = new DateTime();
+                                //entry.CurrentValues["CreatedBy"]=
+                                break;
+                            }
+                        case EntityState.Deleted:
+                            {
+                                entry.State = EntityState.Modified;
+                                entry.CurrentValues["IsDeleted"] = true;
+                                entry.CurrentValues["TimeModified"] = new DateTime();
+                                break;
+                            }
+                        case EntityState.Modified:
+                            {
+                                entry.CurrentValues["TimeModified"] = new DateTime();
+                                break;
+                            }
+                    }
+                }
+            }
+            return base.SaveChanges();
+        }
 
     }
 }
