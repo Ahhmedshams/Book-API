@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Book-API", "Book-API.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Book.Domain", "..\Bookify.Domain\Book.Domain.csproj", "{AD261A1D-4CCC-4958-9207-031499AFD564}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Book.Application", "..\Bookify.Application\Book.Application.csproj", "{12535E09-8DA8-493F-8ABB-9D524010432E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Book.Application", "..\Bookify.Application\Book.Application.csproj", "{12535E09-8DA8-493F-8ABB-9D524010432E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Book.Infrastructure", "..\Book.Infrastructure\Book.Infrastructure.csproj", "{1B753FFA-014C-4F55-A300-4246FD361CCD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Book.Infrastructure", "..\Book.Infrastructure\Book.Infrastructure.csproj", "{1B753FFA-014C-4F55-A300-4246FD361CCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
