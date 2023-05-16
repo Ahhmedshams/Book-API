@@ -1,6 +1,4 @@
-﻿using Book_API.DTO;
-using Book_API.Interfaces;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 
 namespace Book_API.Controller

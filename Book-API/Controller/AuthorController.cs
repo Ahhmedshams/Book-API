@@ -1,7 +1,4 @@
 ﻿using AutoMapper;
-using Book_API.DTO;
-using Book_API.Interfaces;
-using Book_API.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Book_API.Controller

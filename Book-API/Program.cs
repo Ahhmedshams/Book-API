@@ -1,16 +1,8 @@
-using Book_API.Helpers;
-using Book_API.Interfaces;
-using Book_API.Models;
-using Book_API.Repositry;
-using Book_API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Configuration;
 using System.Text;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using System.Xml.Linq;
+using Book_API.Repositry;
 
 namespace Book_API
 {
@@ -27,57 +19,16 @@ namespace Book_API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddDbContext<BookifyContextDb>(options => {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("Connection1"),
-                      b => b.MigrationsAssembly("Book.Infrastructure"));
-                //options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-            });
 
-
-
-            builder.Services.AddScoped<ICategory, CategoryRepository>();
-            builder.Services.AddScoped<IAuthor, AuthorRepository>();
-            builder.Services.AddScoped<IOrder, OrderRepository>();
-            builder.Services.AddScoped<IRentable, RentableRepository>();
-            builder.Services.AddScoped<IPurchasable, PurchasableRepository>();
-
-            builder.Services.AddScoped<ISubscribable, SubscriberRepository>();
-            builder.Services.AddScoped<IApplicationUser, ApplicationUserService>();
-
-            builder.Services.AddScoped<IAuth, AuthRepository>();  // Authorization / Authentication 
-
-            builder.Services.AddScoped<ISubType,  SubTypeRepository>();
+            builder.Services.AddInfrastructureServices(builder.Configuration);
+            builder.Services.AddRepositoryServices(builder.Configuration);
+            builder.Services.AddJWTServices(builder.Configuration);
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             
-            //Identity
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<BookifyContextDb>();
 
-            builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
 
-            string KeyAsString = builder.Configuration["JWT:Key"];
-            byte[] KeyAsByte = Encoding.UTF8.GetBytes(KeyAsString);
-            var authSecret = new SymmetricSecurityKey(KeyAsByte);
-
-            builder.Services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; // 
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; // not valid account
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.SaveToken = true;
-                options.RequireHttpsMetadata = false;
-                options.TokenValidationParameters = new TokenValidationParameters()
-                {
-                    ValidateIssuer = true,
-                    ValidIssuer = builder.Configuration["JWT:Issuer"],
-                    ValidateAudience = true,
-                    ValidAudience = builder.Configuration["JWT:Audience"],
-                    IssuerSigningKey = authSecret
-                };
-            }); // how to check if token valid or not 
+           
 
             var app = builder.Build();
 

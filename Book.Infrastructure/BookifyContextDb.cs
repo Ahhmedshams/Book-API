@@ -1,13 +1,10 @@
 ﻿using Book.Domain.Entity;
-using Book.Infrastructure.Persistence.Configurations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Migrations;
 using System.Reflection;
-using System.Xml;
 
-namespace Book_API.Models
+namespace Book.Infrastructure
 {
     public class BookifyContextDb : IdentityDbContext<ApplicationUser>
     {
