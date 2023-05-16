@@ -5,6 +5,7 @@ namespace Book.Domain.Entity
     {
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public byte[] ProfilePicture { get; set; }
 
         public int TypeId { get; set; }
 

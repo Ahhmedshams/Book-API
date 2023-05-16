@@ -4,7 +4,6 @@
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public byte[] ProfilePicture { get; set; }
         public bool IsSubscriber { get; set; }
 
         public string? CreatedById { get; set; }

@@ -13,7 +13,7 @@ namespace Book.Infrastructure.Persistence.Configurations
             builder.HasIndex(e => e.UserName).IsUnique();
             builder.Property(e => e.CreatedOn).HasDefaultValueSql("GETDATE()");
             builder.ToTable("Users", "security");
-            builder.Property(e => e.ProfilePicture).HasColumnType("VarBinary").IsRequired(false);
+            //builder.Property(e => e.ProfilePicture).HasColumnType("VarBinary").IsRequired(false);
 
 
 
