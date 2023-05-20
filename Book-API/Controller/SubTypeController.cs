@@ -1,5 +1,4 @@
-﻿using Book.Application.Common.Model;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Book_API.Controller
 {

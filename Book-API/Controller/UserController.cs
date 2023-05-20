@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Book.Application.Common.Model;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Book_API.Controller
 {
@@ -17,7 +19,13 @@ namespace Book_API.Controller
         {
             var users = await applicationUser.GetAllAsync();
             if (!users.Any()) return NotFound("Not Found");
-            return Ok(users);
+
+            ResponseMessage<List<ApplicationUserDTO>> responseMessage = new()
+            {
+                Data = users,
+                Status = Status.Success
+            };
+            return Ok(responseMessage);
         }
 
 
@@ -26,7 +34,13 @@ namespace Book_API.Controller
         {
             var user = await applicationUser.GetByIdAsync(id);
             if (user == null) return NotFound();
-            return Ok(user.ToApplicationUserDTO());
+
+            ResponseMessage<ApplicationUserDTO> responseMessage = new()
+            {
+                Data = user.ToApplicationUserDTO(),
+                Status = Status.Success
+            };
+            return Ok(responseMessage);
         }
 
 

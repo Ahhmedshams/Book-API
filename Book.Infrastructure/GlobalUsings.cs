@@ -5,3 +5,4 @@ global using Book.Domain.Entity;
 global using Book.Infrastructure;
 global using Book.Infrastructure.Persistence.Repositry;
 global using Book.Application.Common.Helpers;
+global using Book.Domain.Const;

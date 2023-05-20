@@ -1,4 +1,5 @@
-﻿using Book.Application.Common.Model;
+﻿using Book.Application.Common.DTO;
+using Book.Application.Common.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Book_API.Controller
@@ -28,7 +29,11 @@ namespace Book_API.Controller
                 subscribersDTO.Add(subscriber.ToSubResponse());
             }
 
-            return Ok(subscribersDTO);
+            ResponseMessage<List<SubscriberResponseDTO>> responseMessage = new() { 
+                Data = subscribersDTO,
+                Status = Status.Success
+            };
+            return Ok(responseMessage);
         }
 
         [HttpGet("{Id:int}")]
@@ -36,7 +41,13 @@ namespace Book_API.Controller
         {
             var subscriber = await subscriberService.GetByIdAsync(id);
             if (subscriber == null) return NotFound("Not Found");
-            return Ok(subscriber.ToSubResponse());
+
+            ResponseMessage<SubscriberResponseDTO> responseMessage = new()
+            {
+                Data = subscriber.ToSubResponse(),
+                Status = Status.Success
+            };
+            return Ok(responseMessage);
         }
 
         [HttpDelete("{id:int}")]
@@ -44,7 +55,12 @@ namespace Book_API.Controller
         {
             var subscriber = await subscriberService.DeleteAsync(id);
             if (subscriber == null) return NotFound("Not Found");
-            return Ok(subscriber.ToSubResponse());
+            ResponseMessage<SubscriberResponseDTO> responseMessage = new()
+            {
+                Data = subscriber.ToSubResponse(),
+                Status = Status.Success
+            };
+            return Ok(responseMessage);
         }
 
         [HttpPost]
@@ -53,11 +69,18 @@ namespace Book_API.Controller
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var AppUser = await user.GetByIdAsync(subscriber.UserId);
-            if (AppUser == null) return NotFound("Can Not Found User With this ID");
-                AppUser.IsSubscriber = true;
-             var userUpdate = await  user.EditAsync(AppUser.Id, AppUser);
+            if (AppUser == null) return NotFound(Errors.InvalidUserId);
+
+            AppUser.IsSubscriber = true;
+            var userUpdate = await  user.EditAsync(AppUser.Id, AppUser);
             var sub = await subscriberService.AddAsync(subscriber.ToSubscriber());
-            return Ok(sub);
+
+            ResponseMessage<SubscriberResponseDTO> responseMessage = new()
+            {
+                Data = sub.ToSubResponse(),
+                Status = Status.Success
+            };
+            return Ok(responseMessage);
 
         }
 

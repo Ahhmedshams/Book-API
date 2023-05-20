@@ -3,12 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Book_API.Repositry;
+using Book.Infrastructure.Persistence;
 
 namespace Book_API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +38,13 @@ namespace Book_API
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+
+                using (var scope = app.Services.CreateScope())
+                {
+                    var initialiser = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
+                    await initialiser.InitialiseAsync();
+                    await initialiser.SeedAsync();
+                }
             }
             app.UseHttpsRedirection();
             app.UseAuthentication();

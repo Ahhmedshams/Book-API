@@ -1,5 +1,6 @@
 ﻿using Book.Application.Common.Interfaces;
 using Book.Domain.Entity;
+using Book.Infrastructure.Persistence;
 using Book.Infrastructure.Persistence.Repositry;
 using Book_API.Repositry;
 using Microsoft.AspNetCore.Identity;
@@ -13,7 +14,7 @@ namespace Book.Infrastructure
         public static IServiceCollection AddRepositoryServices(this IServiceCollection services
            , IConfiguration configuration)
         {
-
+            services.AddScoped<ApplicationDbContextInitialiser>();
             services.AddScoped<ICategory, CategoryRepository>();
             services.AddScoped<IAuthor, AuthorRepository>();
             services.AddScoped<IOrder, OrderRepository>();
