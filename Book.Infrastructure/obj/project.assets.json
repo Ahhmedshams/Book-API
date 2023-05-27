@@ -2173,9 +2173,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ahmed\\source\\repos\\Ahhmedshams\\Book-API\\Book.Infrastructure\\Book.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\ahmed\\Source\\Repos\\Ahhmedshams\\Book-API\\Book.Infrastructure\\Book.Infrastructure.csproj",
       "projectName": "Book.Infrastructure",
-      "projectPath": "C:\\Users\\ahmed\\source\\repos\\Ahhmedshams\\Book-API\\Book.Infrastructure\\Book.Infrastructure.csproj",
+      "projectPath": "C:\\Users\\ahmed\\Source\\Repos\\Ahhmedshams\\Book-API\\Book.Infrastructure\\Book.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\ahmed\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\ahmed\\Source\\Repos\\Ahhmedshams\\Book-API\\Book.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
@@ -2198,8 +2198,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\ahmed\\source\\repos\\Ahhmedshams\\Book-API\\Bookify.Application\\Book.Application.csproj": {
-              "projectPath": "C:\\Users\\ahmed\\source\\repos\\Ahhmedshams\\Book-API\\Bookify.Application\\Book.Application.csproj"
+            "C:\\Users\\ahmed\\Source\\Repos\\Ahhmedshams\\Book-API\\Bookify.Application\\Book.Application.csproj": {
+              "projectPath": "C:\\Users\\ahmed\\Source\\Repos\\Ahhmedshams\\Book-API\\Bookify.Application\\Book.Application.csproj"
             }
           }
         }
