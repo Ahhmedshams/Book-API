@@ -11,7 +11,7 @@
         "projectName": "Book.Application",
         "projectPath": "C:\\Users\\ahmed\\source\\repos\\Ahhmedshams\\Book-API\\Bookify.Application\\Book.Application.csproj",
         "packagesPath": "C:\\Users\\ahmed\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ahmed\\source\\repos\\Ahhmedshams\\Book-API\\Bookify.Application\\obj\\",
+        "outputPath": "C:\\Users\\ahmed\\Source\\Repos\\Ahhmedshams\\Book-API\\Bookify.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

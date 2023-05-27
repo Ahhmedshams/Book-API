@@ -31,7 +31,6 @@ namespace Book.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-           modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             modelBuilder.Entity<IdentityRole>().ToTable("Roles");
             modelBuilder.Entity<IdentityUserRole<string>>().ToTable("UserRoles", "security");
@@ -40,6 +39,7 @@ namespace Book.Infrastructure
             modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims", "security");
             modelBuilder.Entity<IdentityUserToken<string>>().ToTable("UserTokens", "security");
 
+           modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             base.OnModelCreating(modelBuilder);
         }

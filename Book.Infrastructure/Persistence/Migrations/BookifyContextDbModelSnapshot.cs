@@ -161,7 +161,7 @@ namespace Book.Infrastructure.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Authors", (string)null);
                 });
 
             modelBuilder.Entity("Book.Domain.Entity.Book", b =>
@@ -216,7 +216,7 @@ namespace Book.Infrastructure.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("Books");
+                    b.ToTable("Books", (string)null);
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Book");
                 });
@@ -256,7 +256,7 @@ namespace Book.Infrastructure.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("Book.Domain.Entity.Order", b =>
@@ -307,7 +307,7 @@ namespace Book.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("Book.Domain.Entity.OrderItem", b =>
@@ -360,7 +360,7 @@ namespace Book.Infrastructure.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("Book.Domain.Entity.Rent", b =>
@@ -421,7 +421,7 @@ namespace Book.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Rents");
+                    b.ToTable("Rents", (string)null);
                 });
 
             modelBuilder.Entity("Book.Domain.Entity.Subscriber", b =>
@@ -478,7 +478,7 @@ namespace Book.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Subscribers");
+                    b.ToTable("Subscribers", (string)null);
                 });
 
             modelBuilder.Entity("Book.Domain.Entity.SubscriptionType", b =>
@@ -526,7 +526,7 @@ namespace Book.Infrastructure.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("SubscriptionTypes");
+                    b.ToTable("SubscriptionTypes", (string)null);
                 });
 
             modelBuilder.Entity("BookCategory", b =>
@@ -541,7 +541,7 @@ namespace Book.Infrastructure.Migrations
 
                     b.HasIndex("CategoriesId");
 
-                    b.ToTable("BookCategory");
+                    b.ToTable("BookCategory", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

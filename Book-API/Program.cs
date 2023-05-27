@@ -1,8 +1,4 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Book_API.Repositry;
+using Book.Infrastructure;
 using Book.Infrastructure.Persistence;
 
 namespace Book_API
